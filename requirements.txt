@@ -1,0 +1,6 @@
+streamlit
+google-genai
+firebase-admin
+google-cloud-firestore
+python-dotenv
+requests
