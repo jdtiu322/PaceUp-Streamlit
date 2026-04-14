@@ -23,7 +23,9 @@ init_firebase()
 init_state()
 restore_saved_session()
 inject_styles()
-render_nav()
+
+if st.session_state.page != "chat":
+    render_nav()
 
 if st.session_state.page == "about":
     show_placeholder_page("About", "This is about page")

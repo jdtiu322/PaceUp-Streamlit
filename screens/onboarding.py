@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import html
+
 import streamlit as st
 
 from config import FITNESS_MAP, ONBOARDING_DAY_OPTIONS, ONBOARDING_GOAL_OPTIONS, ONBOARDING_SEX_OPTIONS, normalize_fitness_level
 from services.firebase import build_chat_profile, get_user_profile, save_onboarding_data
 from state import prime_onboarding_state, toggle_training_day
+
 
 def show_onboarding() -> None:
     user = st.session_state.user
@@ -30,7 +32,7 @@ def show_onboarding() -> None:
                         <div class="ob-phase-line"></div>
                         <div class="ob-phase-label">Onboarding Phase 01</div>
                     </div>
-                    <div class="ob-copyright">© 2024 PACEUP HIGH PERFORMANCE SYSTEMS</div>
+                    <div class="ob-copyright">&copy; 2024 PACEUP HIGH PERFORMANCE SYSTEMS</div>
                 </div>
                 <div class="ob-kinetic"></div>
             </div>
@@ -230,7 +232,3 @@ def show_onboarding() -> None:
                         st.error(f"Failed to save profile: {exc}")
 
         st.markdown('<div class="ob-map-deco"></div>', unsafe_allow_html=True)
-
-
-# ── Chat ──────────────────────────────────────────────────────────────────────
-

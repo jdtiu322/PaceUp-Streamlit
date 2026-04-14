@@ -6,6 +6,7 @@ from components.hero import render_footer, render_register_hero
 from services.firebase import register_user
 from state import clear_register, go_to, set_flash, show_flash
 
+
 def show_register() -> None:
     left, right = st.columns([0.92, 1.08], gap="small")
     with left:
@@ -21,14 +22,14 @@ def show_register() -> None:
             show_flash()
             with st.form("register_form", clear_on_submit=False):
                 st.markdown('<div class="field-label">Full Name</div>', unsafe_allow_html=True)
-                full_name = st.text_input("Full Name", placeholder="Your full name", key="reg_name", label_visibility="collapsed")
+                full_name = st.text_input("Full Name", placeholder="Your full name…", key="reg_name", label_visibility="collapsed")
                 st.markdown('<div class="field-label">Email Address</div>', unsafe_allow_html=True)
                 email = st.text_input("Email Address", placeholder="name@example.com", key="reg_email", label_visibility="collapsed")
                 st.markdown('<div class="field-label">Password</div>', unsafe_allow_html=True)
-                password = st.text_input("Password", placeholder="At least 6 characters", type="password", key="reg_pass", label_visibility="collapsed")
+                password = st.text_input("Password", placeholder="At least 6 characters…", type="password", key="reg_pass", label_visibility="collapsed")
                 st.markdown('<div class="field-label">Confirm Password</div>', unsafe_allow_html=True)
-                confirm = st.text_input("Confirm Password", placeholder="Repeat your password", type="password", key="reg_confirm", label_visibility="collapsed")
-                submitted = st.form_submit_button("Create Account →", type="primary", use_container_width=True)
+                confirm = st.text_input("Confirm Password", placeholder="Repeat your password…", type="password", key="reg_confirm", label_visibility="collapsed")
+                submitted = st.form_submit_button("Create Account", type="primary", use_container_width=True)
             if submitted:
                 if not full_name or not email or not password or not confirm:
                     set_flash("error", "Fill in every field.")
@@ -50,6 +51,3 @@ def show_register() -> None:
     with right:
         render_register_hero()
     render_footer()
-
-
-# ── Onboarding ────────────────────────────────────────────────────────────────

@@ -4,3 +4,4 @@ firebase-admin
 google-cloud-firestore
 python-dotenv
 requests
+streamlit-cookies-controller

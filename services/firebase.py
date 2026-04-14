@@ -7,8 +7,15 @@ import firebase_admin
 import requests
 import streamlit as st
 from firebase_admin import auth, credentials, firestore
+try:
+    from streamlit_cookies_controller import CookieController
+except ModuleNotFoundError:  # pragma: no cover - fallback for environments without the extra package
+    CookieController = None
 
 from config import BASE_DIR, FIREBASE_WEB_API_KEY
+
+AUTH_COOKIE_NAME = "paceup_refresh_token"
+AUTH_COOKIE_MAX_AGE = 60 * 60 * 24 * 30
 
 
 def _firebase_credentials_payload() -> dict:
@@ -41,9 +48,40 @@ def init_firebase() -> None:
         firebase_admin.initialize_app(cred)
 
 
+def _cookie_controller() -> CookieController:
+    if CookieController is None:
+        return None
+    return CookieController(key="paceup_auth_cookies")
+
+
+def _get_refresh_token_cookie() -> str:
+    controller = _cookie_controller()
+    if controller is None:
+        return ""
+    token = controller.get(AUTH_COOKIE_NAME)
+    return str(token) if token else ""
+
+
+def _set_refresh_token_cookie(refresh_token: str) -> None:
+    if not refresh_token:
+        return
+    controller = _cookie_controller()
+    if controller is None:
+        return
+    controller.set(
+        AUTH_COOKIE_NAME,
+        refresh_token,
+        path="/",
+        max_age=AUTH_COOKIE_MAX_AGE,
+        same_site="lax",
+    )
+
+
 def clear_auth_session() -> None:
-    # Deployment-safe no-op. We keep auth only in the current Streamlit session.
-    return None
+    controller = _cookie_controller()
+    if controller is None:
+        return
+    controller.remove(AUTH_COOKIE_NAME, path="/", same_site="lax")
 
 
 def register_user(email: str, password: str, full_name: str):
@@ -112,15 +150,55 @@ def login_user(email: str, password: str):
         if response.status_code != 200:
             return None, data.get("error", {}).get("message", "Login failed.")
         user = auth.get_user_by_email(email.strip())
+        _set_refresh_token_cookie(data.get("refreshToken", ""))
         return user, None
     except Exception as exc:
         return None, str(exc)
 
 
 def restore_saved_session() -> None:
-    # Deployment-safe no-op. Streamlit Community Cloud should not persist refresh tokens to server files.
-    st.session_state.auth_restore_attempted = True
-    return None
+    if st.session_state.get("user") is not None:
+        return
+
+    refresh_token = _get_refresh_token_cookie()
+    if not FIREBASE_WEB_API_KEY or not refresh_token:
+        return
+
+    url = f"https://securetoken.googleapis.com/v1/token?key={FIREBASE_WEB_API_KEY}"
+    try:
+        response = requests.post(
+            url,
+            data={
+                "grant_type": "refresh_token",
+                "refresh_token": refresh_token,
+            },
+            timeout=15,
+        )
+        data = response.json()
+    except Exception:
+        return
+
+    if response.status_code != 200:
+        clear_auth_session()
+        return
+
+    uid = data.get("user_id")
+    email = data.get("user_email")
+    try:
+        if uid:
+            user = auth.get_user(uid)
+        elif email:
+            user = auth.get_user_by_email(email)
+        else:
+            clear_auth_session()
+            return
+    except Exception:
+        clear_auth_session()
+        return
+
+    _set_refresh_token_cookie(data.get("refresh_token", refresh_token))
+    st.session_state.user = user
+    st.session_state.page = "chat" if check_onboarding_status(user.uid) else "onboarding"
 
 
 def check_onboarding_status(uid: str) -> bool:
