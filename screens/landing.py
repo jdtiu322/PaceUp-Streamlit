@@ -1,8 +1,26 @@
 from __future__ import annotations
 
+import html
+
 import streamlit as st
 
-from state import route_link
+VALID_LANDING_PAGES = {"home", "login", "register", "about", "contact", "onboarding", "chat"}
+
+
+def _route_href(page: str) -> str:
+    safe_page = page if page in VALID_LANDING_PAGES else "home"
+    return f"?page={safe_page}"
+
+
+def _route_link(label: str, page: str, css_class: str) -> None:
+    st.markdown(
+        (
+            f'<a class="{html.escape(css_class, quote=True)}" '
+            f'href="{html.escape(_route_href(page), quote=True)}" target="_self">'
+            f"{html.escape(label)}</a>"
+        ),
+        unsafe_allow_html=True,
+    )
 
 
 def show_landing() -> None:
@@ -35,9 +53,9 @@ def show_landing() -> None:
         with actions_col:
             login_col, start_col = st.columns([.76, 1.24], gap="small")
             with login_col:
-                route_link("Log in", "login", "landing-route-link landing-login-link")
+                _route_link("Log in", "login", "landing-route-link landing-login-link")
             with start_col:
-                route_link("Start training  →", "register", "landing-route-link landing-start-link")
+                _route_link("Start training  →", "register", "landing-route-link landing-start-link")
 
     with st.container(key="landing_hero"):
         copy_col, visual_col = st.columns([1.04, .96], gap="large")
@@ -58,9 +76,9 @@ def show_landing() -> None:
             )
             cta_one, cta_two, _ = st.columns([.34, .27, .39], gap="small")
             with cta_one:
-                route_link("Get your plan free  →", "register", "landing-route-link landing-primary-link")
+                _route_link("Get your plan free  →", "register", "landing-route-link landing-primary-link")
             with cta_two:
-                route_link("Try the chat", "login", "landing-route-link landing-secondary-link")
+                _route_link("Try the chat", "login", "landing-route-link landing-secondary-link")
             st.markdown(
                 """
                 <div class="landing-stats">
