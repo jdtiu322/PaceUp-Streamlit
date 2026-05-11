@@ -9,17 +9,16 @@ import streamlit.components.v1 as components
 
 import config
 from config import ONBOARDING_DAY_OPTIONS, ONBOARDING_SEX_OPTIONS, normalize_fitness_level, normalize_goal_distance
-from services.firebase import (
-    AUTH_COOKIE_NAME,
-    check_onboarding_status,
-    clear_auth_session,
-    restore_saved_session as firebase_restore_saved_session,
-)
+from services import firebase as firebase_service
 
 
 VALID_PAGES = {"home", "login", "register", "about", "contact", "onboarding", "chat"}
 DEFAULT_PAGE = "home"
 PAGE_QUERY_PARAM = "page"
+AUTH_COOKIE_NAME = getattr(firebase_service, "AUTH_COOKIE_NAME", "paceup_refresh_token")
+check_onboarding_status = firebase_service.check_onboarding_status
+clear_auth_session = firebase_service.clear_auth_session
+firebase_restore_saved_session = firebase_service.restore_saved_session
 
 
 def _auth_cookie_secure() -> bool:

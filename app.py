@@ -14,17 +14,16 @@ from screens.login import show_login
 from screens.onboarding import show_onboarding
 from screens.placeholder import show_placeholder_page
 from screens.register import show_register
-from services.firebase import (
-    AUTH_COOKIE_MAX_AGE,
-    AUTH_COOKIE_NAME,
-    AUTH_SESSION_QUERY_PARAM,
-    check_onboarding_status,
-    init_firebase,
-)
+from services import firebase as firebase_service
 from state import go_to, init_state, restore_saved_session, set_flash, sync_page_to_url
 
 PROTECTED_PAGES = {"onboarding", "chat"}
 MAX_AUTH_RESTORE_ATTEMPTS = 3
+AUTH_COOKIE_MAX_AGE = getattr(firebase_service, "AUTH_COOKIE_MAX_AGE", 60 * 60 * 24 * 30)
+AUTH_COOKIE_NAME = getattr(firebase_service, "AUTH_COOKIE_NAME", "paceup_refresh_token")
+AUTH_SESSION_QUERY_PARAM = getattr(firebase_service, "AUTH_SESSION_QUERY_PARAM", "_auth")
+check_onboarding_status = firebase_service.check_onboarding_status
+init_firebase = firebase_service.init_firebase
 
 
 def _auth_cookie_secure() -> bool:
