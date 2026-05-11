@@ -14,7 +14,22 @@ try:
 except ModuleNotFoundError:  # pragma: no cover - fallback for environments without the extra package
     CookieController = None
 
-from config import AUTH_COOKIE_SECURE, BASE_DIR, FIREBASE_WEB_API_KEY
+import config
+
+BASE_DIR = config.BASE_DIR
+FIREBASE_WEB_API_KEY = config.FIREBASE_WEB_API_KEY
+
+
+def _auth_cookie_secure() -> bool:
+    configured = getattr(config, "AUTH_COOKIE_SECURE", None)
+    if configured is not None:
+        return str(configured).strip().lower() in {"1", "true", "yes", "on"}
+    get_secret = getattr(config, "get_secret", None)
+    raw_value = get_secret("AUTH_COOKIE_SECURE", "") if callable(get_secret) else ""
+    return str(raw_value).strip().lower() in {"1", "true", "yes", "on"}
+
+
+AUTH_COOKIE_SECURE = _auth_cookie_secure()
 
 AUTH_COOKIE_NAME = "paceup_refresh_token"
 AUTH_COOKIE_MAX_AGE = 60 * 60 * 24 * 30

@@ -7,8 +7,8 @@ from datetime import datetime
 import streamlit as st
 import streamlit.components.v1 as components
 
+import config
 from config import ONBOARDING_DAY_OPTIONS, ONBOARDING_SEX_OPTIONS, normalize_fitness_level, normalize_goal_distance
-from config import AUTH_COOKIE_SECURE
 from services.firebase import (
     AUTH_COOKIE_NAME,
     check_onboarding_status,
@@ -20,6 +20,18 @@ from services.firebase import (
 VALID_PAGES = {"home", "login", "register", "about", "contact", "onboarding", "chat"}
 DEFAULT_PAGE = "home"
 PAGE_QUERY_PARAM = "page"
+
+
+def _auth_cookie_secure() -> bool:
+    configured = getattr(config, "AUTH_COOKIE_SECURE", None)
+    if configured is not None:
+        return str(configured).strip().lower() in {"1", "true", "yes", "on"}
+    get_secret = getattr(config, "get_secret", None)
+    raw_value = get_secret("AUTH_COOKIE_SECURE", "") if callable(get_secret) else ""
+    return str(raw_value).strip().lower() in {"1", "true", "yes", "on"}
+
+
+AUTH_COOKIE_SECURE = _auth_cookie_secure()
 
 
 def _get_query_page() -> str | None:

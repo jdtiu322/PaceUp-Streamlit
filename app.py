@@ -7,7 +7,7 @@ import streamlit.components.v1 as components
 
 from components.navbar import render_nav
 from components.styles import inject_styles
-from config import AUTH_COOKIE_SECURE
+import config
 from screens.chat import show_chat
 from screens.landing import show_landing
 from screens.login import show_login
@@ -25,6 +25,18 @@ from state import go_to, init_state, restore_saved_session, set_flash, sync_page
 
 PROTECTED_PAGES = {"onboarding", "chat"}
 MAX_AUTH_RESTORE_ATTEMPTS = 3
+
+
+def _auth_cookie_secure() -> bool:
+    configured = getattr(config, "AUTH_COOKIE_SECURE", None)
+    if configured is not None:
+        return str(configured).strip().lower() in {"1", "true", "yes", "on"}
+    get_secret = getattr(config, "get_secret", None)
+    raw_value = get_secret("AUTH_COOKIE_SECURE", "") if callable(get_secret) else ""
+    return str(raw_value).strip().lower() in {"1", "true", "yes", "on"}
+
+
+AUTH_COOKIE_SECURE = _auth_cookie_secure()
 
 st.set_page_config(
     page_title="PaceUp",
