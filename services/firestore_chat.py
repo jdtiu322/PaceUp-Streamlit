@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from firebase_admin import firestore
 
 from services.firebase import get_firestore_client
+from services.gemini import generate_conversation_title
 
 
 MESSAGE_PAGE_SIZE = 12
@@ -40,7 +41,7 @@ def load_chat_sessions(uid: str) -> list:
 
 
 def create_chat_session(uid: str, first_message: str) -> str:
-    title = first_message[:40] + ("..." if len(first_message) > 40 else "")
+    title = generate_conversation_title(first_message)
     now = datetime.now(timezone.utc)
     ref = (
         get_firestore_client()
@@ -49,6 +50,7 @@ def create_chat_session(uid: str, first_message: str) -> str:
         .add(
             {
                 "title": title,
+                "conversation_title": title,
                 "created_at": now,
                 "updated_at": now,
                 "latest_message_snippet": _message_snippet(first_message),

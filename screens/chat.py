@@ -193,19 +193,20 @@ def _session_id(session: dict) -> str:
 
 
 def _session_title(session: dict) -> str:
-    return str(session.get("title") or "New conversation").strip() or "New conversation"
+    return str(session.get("conversation_title") or session.get("title") or "New conversation").strip() or "New conversation"
 
 
-def _session_title_key(session: dict) -> str:
-    return " ".join(_session_title(session).split()).casefold()
-
-
-def _session_snippet(session: dict) -> str:
-    for key in ("latest_message_snippet", "preview", "snippet", "last_message"):
-        value = str(session.get(key) or "").strip()
-        if value:
-            return value
-    return ""
+def _unique_sessions_by_id(sessions: list[dict]) -> list[dict]:
+    seen_ids: set[str] = set()
+    unique_sessions: list[dict] = []
+    for session in sessions:
+        session_id = _session_id(session)
+        if session_id:
+            if session_id in seen_ids:
+                continue
+            seen_ids.add(session_id)
+        unique_sessions.append(session)
+    return unique_sessions
 
 
 def _group_sessions_by_period(sessions: list[dict]) -> list[tuple[str, list[dict]]]:
@@ -215,15 +216,7 @@ def _group_sessions_by_period(sessions: list[dict]) -> list[tuple[str, list[dict
     week_start = today_start - timedelta(days=7)
 
     groups: dict[str, list[dict]] = {"Today": [], "Yesterday": [], "This week": [], "Earlier": []}
-    seen_ids: set[str] = set()
-    seen_titles_by_group: dict[str, set[str]] = {label: set() for label in groups}
-    for session in sessions:
-        session_id = _session_id(session)
-        if session_id:
-            if session_id in seen_ids:
-                continue
-            seen_ids.add(session_id)
-
+    for session in _unique_sessions_by_id(sessions):
         ts = _coerce_timestamp(session.get("updated_at") or session.get("created_at"))
         if ts is None:
             label = "Earlier"
@@ -236,10 +229,6 @@ def _group_sessions_by_period(sessions: list[dict]) -> list[tuple[str, list[dict
         else:
             label = "Earlier"
 
-        title_key = _session_title_key(session)
-        if title_key in seen_titles_by_group[label]:
-            continue
-        seen_titles_by_group[label].add(title_key)
         groups[label].append(session)
     return [(label, items) for label, items in groups.items() if items]
 
@@ -309,7 +298,7 @@ def show_chat() -> None:
     if st.session_state.active_session_id:
         for session in st.session_state.chat_sessions:
             if session.get("id") == st.session_state.active_session_id:
-                active_session_title = session.get("title", "")
+                active_session_title = _session_title(session)
                 break
 
     with st.container(key="chat_shell"):
@@ -366,11 +355,9 @@ def show_chat() -> None:
                                 if not session_id:
                                     continue
                                 title = _session_title(session)
-                                snippet = _session_snippet(session)
                                 is_active = session_id == st.session_state.active_session_id
-                                btn_label = f"**{title}**  \n{snippet}" if snippet else f"**{title}**"
                                 st.button(
-                                    btn_label,
+                                    title,
                                     key=f"sess_{session_id}",
                                     type="primary" if is_active else "secondary",
                                     use_container_width=True,

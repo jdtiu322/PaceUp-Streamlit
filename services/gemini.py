@@ -10,6 +10,8 @@ from config import GEMINI_API_KEY, GEMINI_MODEL
 
 client = genai.Client(api_key=GEMINI_API_KEY) if GEMINI_API_KEY else None
 logger = logging.getLogger(__name__)
+TITLE_MAX_WORDS = 3
+TITLE_FALLBACK_WORDS = 3
 
 
 PROMPT_ATTACK_PATTERNS = [
@@ -28,6 +30,29 @@ PROMPT_ATTACK_PATTERNS = [
     r"\bjailbreak\b",
     r"\bprompt injection\b",
 ]
+
+TITLE_STOP_WORDS = {
+    "a",
+    "an",
+    "and",
+    "are",
+    "for",
+    "from",
+    "give",
+    "help",
+    "how",
+    "i",
+    "me",
+    "my",
+    "of",
+    "on",
+    "please",
+    "should",
+    "the",
+    "this",
+    "to",
+    "with",
+}
 
 
 def build_system_prompt(profile: dict) -> str:
@@ -106,6 +131,53 @@ def _friendly_gemini_error(exc: Exception) -> str:
         )
 
     return "Sorry, PaceUp could not reach Gemini right now. Please try again in a moment."
+
+
+def _sanitize_title(raw_title: str) -> str:
+    text = re.sub(r"(?i)^title\s*:\s*", "", raw_title or "").strip()
+    text = re.sub(r"[\r\n\t]+", " ", text)
+    text = re.sub(r"[^A-Za-z0-9 '/-]+", "", text)
+    words = [word for word in text.split() if word]
+    if not words:
+        return ""
+    return " ".join(words[:TITLE_MAX_WORDS]).title()
+
+
+def _fallback_conversation_title(prompt: str) -> str:
+    words = re.findall(r"[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)?", prompt or "")
+    meaningful_words = [word for word in words if word.casefold() not in TITLE_STOP_WORDS]
+    selected = meaningful_words[:TITLE_FALLBACK_WORDS] or words[:TITLE_FALLBACK_WORDS]
+    return " ".join(selected).title() if selected else "New Conversation"
+
+
+def generate_conversation_title(prompt: str) -> str:
+    fallback_title = _fallback_conversation_title(prompt)
+    try:
+        if client is None:
+            return fallback_title
+
+        response = client.models.generate_content(
+            model=GEMINI_MODEL,
+            config=types.GenerateContentConfig(
+                system_instruction=(
+                    "Summarize this request in 3 words or less for a sidebar title. "
+                    "Return only the title, with no punctuation, no quotes, and no prefix."
+                ),
+                temperature=0.1,
+                max_output_tokens=12,
+            ),
+            contents=[
+                types.Content(
+                    role="user",
+                    parts=[types.Part.from_text(text=f"Request:\n{prompt}")],
+                )
+            ],
+        )
+        title = _sanitize_title(getattr(response, "text", "") or "")
+        return title or fallback_title
+    except Exception:
+        logger.exception("Gemini conversation-title generation failed.")
+        return fallback_title
 
 
 def _build_contents(messages: list) -> list[types.Content]:

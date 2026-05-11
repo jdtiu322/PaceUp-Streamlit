@@ -4932,6 +4932,40 @@ body:has(.chat-page-bg) .st-key-chat_suggestions_empty .stButton > button:hover 
     }}
 }}
 
+[data-testid="stSidebarNav"] ul li {{
+    height: auto !important;
+    margin-bottom: 10px !important;
+}}
+body:has(.chat-page-bg) .st-key-chat_sessions .stButton > button,
+body:has(.st-key-chat_shell) .st-key-chat_sessions .stButton > button {{
+    min-height: 2.45rem !important;
+    height: 2.45rem !important;
+    padding: .42rem .72rem .58rem !important;
+    align-items: center !important;
+    line-height: 1.35 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}}
+body:has(.chat-page-bg) .st-key-chat_sessions .stButton > button [data-testid="stMarkdownContainer"],
+body:has(.chat-page-bg) .st-key-chat_sessions .stButton > button p,
+body:has(.chat-page-bg) .st-key-chat_sessions .stButton > button span,
+body:has(.chat-page-bg) .st-key-chat_sessions .stButton > button strong,
+body:has(.st-key-chat_shell) .st-key-chat_sessions .stButton > button [data-testid="stMarkdownContainer"],
+body:has(.st-key-chat_shell) .st-key-chat_sessions .stButton > button p,
+body:has(.st-key-chat_shell) .st-key-chat_sessions .stButton > button span,
+body:has(.st-key-chat_shell) .st-key-chat_sessions .stButton > button strong {{
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding-bottom: .04rem !important;
+    line-height: 1.35 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}}
+
 </style>
 """, unsafe_allow_html=True)
 
