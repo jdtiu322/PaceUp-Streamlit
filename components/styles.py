@@ -4966,6 +4966,57 @@ body:has(.st-key-chat_shell) .st-key-chat_sessions .stButton > button strong {{
     text-overflow: ellipsis !important;
 }}
 
+/* Visible Voice: keep live and completed chat responses readable. */
+body:has(.chat-page-bg) .chat-msg,
+body:has(.chat-page-bg) .chat-msg *,
+body:has(.chat-page-bg) .msg-bubble,
+body:has(.chat-page-bg) .msg-bubble *,
+body:has(.chat-page-bg) .assistant-response,
+body:has(.chat-page-bg) .assistant-response *,
+body:has(.chat-page-bg) .st-key-streaming_msg,
+body:has(.chat-page-bg) .st-key-streaming_msg *,
+body:has(.chat-page-bg) .st-key-streaming_bubble,
+body:has(.chat-page-bg) .st-key-streaming_bubble *,
+body:has(.chat-page-bg) [data-testid="stChatMessage"],
+body:has(.chat-page-bg) [data-testid="stChatMessage"] *,
+body:has(.chat-page-bg) div[data-testid="stChatMessageContent"],
+body:has(.chat-page-bg) div[data-testid="stChatMessageContent"] * {{
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    opacity: 1 !important;
+    filter: none !important;
+    text-shadow: none !important;
+}}
+body:has(.chat-page-bg) .assistant-response p,
+body:has(.chat-page-bg) .assistant-response li,
+body:has(.chat-page-bg) .assistant-response strong,
+body:has(.chat-page-bg) .assistant-response em,
+body:has(.chat-page-bg) .assistant-response code,
+body:has(.chat-page-bg) .msg-bubble p,
+body:has(.chat-page-bg) .msg-bubble li,
+body:has(.chat-page-bg) .st-key-streaming_bubble [data-testid="stMarkdownContainer"],
+body:has(.chat-page-bg) .st-key-streaming_bubble [data-testid="stMarkdownContainer"] *,
+body:has(.chat-page-bg) [data-testid="stChatMessage"] p,
+body:has(.chat-page-bg) [data-testid="stChatMessage"] li,
+body:has(.chat-page-bg) [data-testid="stChatMessage"] strong,
+body:has(.chat-page-bg) [data-testid="stChatMessage"] em,
+body:has(.chat-page-bg) [data-testid="stChatMessage"] code {{
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    opacity: 1 !important;
+}}
+body:has(.chat-page-bg) .st-key-chat_body_inner .chat-msg:last-of-type,
+body:has(.chat-page-bg) .st-key-chat_body_inner .chat-msg:last-of-type *,
+body:has(.chat-page-bg) .st-key-streaming_msg,
+body:has(.chat-page-bg) .st-key-streaming_msg *,
+body:has(.chat-page-bg) .stChatInputContainer + div .stChatMessage:last-child,
+body:has(.chat-page-bg) .stChatInputContainer + div .stChatMessage:last-child * {{
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    opacity: 1 !important;
+    filter: none !important;
+}}
+
 </style>
 """, unsafe_allow_html=True)
 
