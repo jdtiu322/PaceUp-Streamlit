@@ -24,6 +24,7 @@ def get_secret(name: str, default: str = "") -> str:
 FIREBASE_WEB_API_KEY = get_secret("FIREBASE_WEB_API_KEY", "")
 GEMINI_API_KEY = get_secret("GEMINI_API_KEY", "")
 GEMINI_MODEL = get_secret("GEMINI_MODEL", "gemini-2.5-flash-lite")
+GEMINI_EMBEDDING_MODEL = get_secret("GEMINI_EMBEDDING_MODEL", "gemini-embedding-001")
 
 _AUTH_COOKIE_SECURE_VALUE = get_secret("AUTH_COOKIE_SECURE", "").strip().lower()
 # Local Streamlit usually runs over http://localhost, where Secure cookies are

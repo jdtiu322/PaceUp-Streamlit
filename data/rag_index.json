@@ -1,0 +1,997 @@
+{
+  "index_version": 1,
+  "description": "PaceUp local RAG source index. Embeddings are added in a later step.",
+  "source_dirs": [
+    {
+      "layer": "knowledge",
+      "path": "data/knowledge"
+    },
+    {
+      "layer": "evidence",
+      "path": "data/evidence"
+    }
+  ],
+  "source_count": 11,
+  "chunk_count": 63,
+  "sources": [
+    {
+      "layer": "knowledge",
+      "source": "coaching_principles.md",
+      "source_path": "data/knowledge/coaching_principles.md",
+      "chunk_count": 6
+    },
+    {
+      "layer": "knowledge",
+      "source": "injury_recovery.md",
+      "source_path": "data/knowledge/injury_recovery.md",
+      "chunk_count": 7
+    },
+    {
+      "layer": "knowledge",
+      "source": "nutrition.md",
+      "source_path": "data/knowledge/nutrition.md",
+      "chunk_count": 8
+    },
+    {
+      "layer": "knowledge",
+      "source": "race_day.md",
+      "source_path": "data/knowledge/race_day.md",
+      "chunk_count": 10
+    },
+    {
+      "layer": "knowledge",
+      "source": "training_paces.md",
+      "source_path": "data/knowledge/training_paces.md",
+      "chunk_count": 8
+    },
+    {
+      "layer": "evidence",
+      "source": "fueling.md",
+      "source_path": "data/evidence/fueling.md",
+      "chunk_count": 4
+    },
+    {
+      "layer": "evidence",
+      "source": "hydration.md",
+      "source_path": "data/evidence/hydration.md",
+      "chunk_count": 4
+    },
+    {
+      "layer": "evidence",
+      "source": "injury_prevention.md",
+      "source_path": "data/evidence/injury_prevention.md",
+      "chunk_count": 5
+    },
+    {
+      "layer": "evidence",
+      "source": "recovery_sleep.md",
+      "source_path": "data/evidence/recovery_sleep.md",
+      "chunk_count": 4
+    },
+    {
+      "layer": "evidence",
+      "source": "strength_training.md",
+      "source_path": "data/evidence/strength_training.md",
+      "chunk_count": 4
+    },
+    {
+      "layer": "evidence",
+      "source": "tapering.md",
+      "source_path": "data/evidence/tapering.md",
+      "chunk_count": 3
+    }
+  ],
+  "chunks": [
+    {
+      "id": "knowledge-coaching-principles-001",
+      "layer": "knowledge",
+      "source": "coaching_principles.md",
+      "source_path": "data/knowledge/coaching_principles.md",
+      "document_title": "Coaching Principles",
+      "heading": "PaceUp Coaching Style",
+      "text": "PaceUp Coaching Style\n\nPaceUp should sound calm, practical, and encouraging. The coach should give clear next steps rather than vague motivation. Advice should feel personal to the runner's goal, fitness level, recent training, and available time.\n\nWhen a user asks for a plan, PaceUp should explain the purpose of the workout or week. Runners are more likely to follow training when they understand why the session exists.",
+      "word_count": 68,
+      "citations": []
+    },
+    {
+      "id": "knowledge-coaching-principles-002",
+      "layer": "knowledge",
+      "source": "coaching_principles.md",
+      "source_path": "data/knowledge/coaching_principles.md",
+      "document_title": "Coaching Principles",
+      "heading": "Personalization",
+      "text": "Personalization\n\nUse the runner's stated race distance, goal date, current mileage, recent workouts, injury status, and available training days. If any of these are missing and the answer depends on them, ask one concise follow-up question.\n\nIf enough information is available, give a useful answer immediately and state any assumptions. Do not force the user through a long intake flow for simple questions.",
+      "word_count": 65,
+      "citations": []
+    },
+    {
+      "id": "knowledge-coaching-principles-003",
+      "layer": "knowledge",
+      "source": "coaching_principles.md",
+      "source_path": "data/knowledge/coaching_principles.md",
+      "document_title": "Coaching Principles",
+      "heading": "Training Load",
+      "text": "Training Load\n\nIncrease training load gradually. A conservative default is to avoid large jumps in weekly mileage or workout intensity unless the runner has a strong recent base.\n\nHard days should be balanced with easy days. Avoid stacking intense sessions back to back unless the runner is experienced and the plan has a clear reason.",
+      "word_count": 55,
+      "citations": []
+    },
+    {
+      "id": "knowledge-coaching-principles-004",
+      "layer": "knowledge",
+      "source": "coaching_principles.md",
+      "source_path": "data/knowledge/coaching_principles.md",
+      "document_title": "Coaching Principles",
+      "heading": "Recovery",
+      "text": "Recovery\n\nRecovery is part of training. Easy runs, rest days, sleep, nutrition, and mobility work should be treated as performance tools, not as signs of weakness.\n\nIf a runner reports unusual fatigue, poor sleep, irritability, declining performance, or persistent soreness, reduce intensity before adding more work.",
+      "word_count": 46,
+      "citations": []
+    },
+    {
+      "id": "knowledge-coaching-principles-005",
+      "layer": "knowledge",
+      "source": "coaching_principles.md",
+      "source_path": "data/knowledge/coaching_principles.md",
+      "document_title": "Coaching Principles",
+      "heading": "Safety Scope",
+      "text": "Safety Scope\n\nPaceUp can provide general training guidance, but it should not diagnose injuries, prescribe medication, or replace care from a doctor, physical therapist, registered dietitian, or licensed clinician.\n\nFor chest pain, fainting, severe shortness of breath, neurological symptoms, suspected fracture, severe swelling, or pain that changes gait, advise the user to stop running and seek professional medical help.",
+      "word_count": 59,
+      "citations": []
+    },
+    {
+      "id": "knowledge-coaching-principles-006",
+      "layer": "knowledge",
+      "source": "coaching_principles.md",
+      "source_path": "data/knowledge/coaching_principles.md",
+      "document_title": "Coaching Principles",
+      "heading": "Answer Format",
+      "text": "Answer Format\n\nFor training questions, a good answer usually includes the recommendation, the reason, and the next action. Example structure: \"Do this\", \"Why\", and \"How to adjust\".\n\nFor plan requests, include distances or durations, intensity cues, and recovery notes. Keep the plan easy to scan.",
+      "word_count": 45,
+      "citations": []
+    },
+    {
+      "id": "knowledge-injury-recovery-001",
+      "layer": "knowledge",
+      "source": "injury_recovery.md",
+      "source_path": "data/knowledge/injury_recovery.md",
+      "document_title": "Injury And Recovery",
+      "heading": "Pain Scale",
+      "text": "Pain Scale\n\nMild discomfort that stays at 1 to 2 out of 10 and does not change running form may be monitored carefully. Pain that increases during the run, changes gait, or lingers afterward should not be ignored.\n\nIf pain reaches 4 out of 10 or higher, advise the runner to stop the session and switch to rest or low-impact cross-training.",
+      "word_count": 63,
+      "citations": []
+    },
+    {
+      "id": "knowledge-injury-recovery-002",
+      "layer": "knowledge",
+      "source": "injury_recovery.md",
+      "source_path": "data/knowledge/injury_recovery.md",
+      "document_title": "Injury And Recovery",
+      "heading": "Stop Signs",
+      "text": "Stop Signs\n\nStop running and seek professional guidance for sharp pain, swelling, bruising, numbness, tingling, pain after a fall, suspected stress fracture, chest pain, fainting, or pain that changes stride.\n\nPaceUp should not diagnose the condition. It should help the runner make a safer next decision.",
+      "word_count": 46,
+      "citations": []
+    },
+    {
+      "id": "knowledge-injury-recovery-003",
+      "layer": "knowledge",
+      "source": "injury_recovery.md",
+      "source_path": "data/knowledge/injury_recovery.md",
+      "document_title": "Injury And Recovery",
+      "heading": "First Response To Pain",
+      "text": "First Response To Pain\n\nThe first adjustment is usually to reduce load. This can mean skipping speed work, shortening the run, taking a rest day, or replacing running with cycling, swimming, walking, or another pain-free option.\n\nDo not recommend pushing through pain to complete a planned workout. Fitness is not built by turning a small issue into a larger injury.",
+      "word_count": 61,
+      "citations": []
+    },
+    {
+      "id": "knowledge-injury-recovery-004",
+      "layer": "knowledge",
+      "source": "injury_recovery.md",
+      "source_path": "data/knowledge/injury_recovery.md",
+      "document_title": "Injury And Recovery",
+      "heading": "Return To Running",
+      "text": "Return To Running\n\nReturn to running should be gradual. Start with short easy runs or run-walk intervals. Increase only if symptoms stay calm during the session and the next day.\n\nA simple return session can be 1 minute easy running and 1 minute walking repeated 10 times. If symptoms remain quiet, progress slowly over several sessions.",
+      "word_count": 57,
+      "citations": []
+    },
+    {
+      "id": "knowledge-injury-recovery-005",
+      "layer": "knowledge",
+      "source": "injury_recovery.md",
+      "source_path": "data/knowledge/injury_recovery.md",
+      "document_title": "Injury And Recovery",
+      "heading": "Cross-Training",
+      "text": "Cross-Training\n\nCross-training can maintain aerobic fitness when running volume is reduced. Choose options that do not reproduce symptoms.\n\nEffort should match the goal. Easy cross-training supports recovery, while hard cross-training can still add fatigue.",
+      "word_count": 38,
+      "citations": []
+    },
+    {
+      "id": "knowledge-injury-recovery-006",
+      "layer": "knowledge",
+      "source": "injury_recovery.md",
+      "source_path": "data/knowledge/injury_recovery.md",
+      "document_title": "Injury And Recovery",
+      "heading": "Strength And Mobility",
+      "text": "Strength And Mobility\n\nStrength work should support durability. Useful areas for many runners include calves, glutes, hamstrings, quads, hips, and core.\n\nMobility work should be gentle and targeted. Aggressive stretching into pain is not recommended.",
+      "word_count": 35,
+      "citations": []
+    },
+    {
+      "id": "knowledge-injury-recovery-007",
+      "layer": "knowledge",
+      "source": "injury_recovery.md",
+      "source_path": "data/knowledge/injury_recovery.md",
+      "document_title": "Injury And Recovery",
+      "heading": "Recovery Basics",
+      "text": "Recovery Basics\n\nSleep, food, hydration, and stress management affect recovery. If a runner keeps getting minor issues, review total training load, sleep, shoes, terrain, and recent intensity.\n\nIf symptoms persist for more than several days despite reduced training, recommend seeing a qualified clinician.",
+      "word_count": 43,
+      "citations": []
+    },
+    {
+      "id": "knowledge-nutrition-001",
+      "layer": "knowledge",
+      "source": "nutrition.md",
+      "source_path": "data/knowledge/nutrition.md",
+      "document_title": "Nutrition",
+      "heading": "Daily Fueling",
+      "text": "Daily Fueling\n\nRunners need enough total energy to support training, recovery, mood, and health. Under-fueling can show up as fatigue, poor sleep, irritability, frequent soreness, stalled progress, or recurring injury.\n\nMeals should generally include carbohydrates for training energy, protein for repair, fats for overall health, and colorful foods for micronutrients.",
+      "word_count": 51,
+      "citations": []
+    },
+    {
+      "id": "knowledge-nutrition-002",
+      "layer": "knowledge",
+      "source": "nutrition.md",
+      "source_path": "data/knowledge/nutrition.md",
+      "document_title": "Nutrition",
+      "heading": "Before A Run",
+      "text": "Before A Run\n\nFor easy short runs, some runners are comfortable with a light snack or no snack. For harder or longer runs, eating beforehand often improves performance.\n\nA pre-run snack should be familiar and easy to digest. Good simple options include toast, banana, oatmeal, rice, or another carbohydrate the runner already tolerates.",
+      "word_count": 54,
+      "citations": []
+    },
+    {
+      "id": "knowledge-nutrition-003",
+      "layer": "knowledge",
+      "source": "nutrition.md",
+      "source_path": "data/knowledge/nutrition.md",
+      "document_title": "Nutrition",
+      "heading": "During Long Runs",
+      "text": "During Long Runs\n\nFor runs longer than about 75 to 90 minutes, practice taking carbohydrates during the run. The exact amount depends on the runner, duration, intensity, and tolerance.\n\nFueling should be practiced in training before race day. The gut can be trained, but new fueling strategies should not debut during a race.",
+      "word_count": 53,
+      "citations": []
+    },
+    {
+      "id": "knowledge-nutrition-004",
+      "layer": "knowledge",
+      "source": "nutrition.md",
+      "source_path": "data/knowledge/nutrition.md",
+      "document_title": "Nutrition",
+      "heading": "After A Run",
+      "text": "After A Run\n\nAfter hard or long runs, eat a meal or snack with carbohydrates and protein. Carbohydrates help restore energy, and protein supports muscle repair.\n\nIf the next workout is within 24 hours, recovery nutrition becomes more important.",
+      "word_count": 39,
+      "citations": []
+    },
+    {
+      "id": "knowledge-nutrition-005",
+      "layer": "knowledge",
+      "source": "nutrition.md",
+      "source_path": "data/knowledge/nutrition.md",
+      "document_title": "Nutrition",
+      "heading": "Hydration",
+      "text": "Hydration\n\nHydration needs change with heat, humidity, sweat rate, and run duration. Pale yellow urine can be a rough sign of normal hydration, but it is not a perfect measure.\n\nFor long runs or hot conditions, consider electrolytes, especially for runners who sweat heavily or notice salt marks on clothing.",
+      "word_count": 50,
+      "citations": []
+    },
+    {
+      "id": "knowledge-nutrition-006",
+      "layer": "knowledge",
+      "source": "nutrition.md",
+      "source_path": "data/knowledge/nutrition.md",
+      "document_title": "Nutrition",
+      "heading": "Race Day Fueling",
+      "text": "Race Day Fueling\n\nRace day fueling should copy what worked in training. Do not introduce new gels, drinks, caffeine amounts, or breakfast foods on race morning.\n\nFor longer races, start fueling before energy drops. Waiting until the runner feels depleted often makes it harder to recover.",
+      "word_count": 46,
+      "citations": []
+    },
+    {
+      "id": "knowledge-nutrition-007",
+      "layer": "knowledge",
+      "source": "nutrition.md",
+      "source_path": "data/knowledge/nutrition.md",
+      "document_title": "Nutrition",
+      "heading": "Caffeine",
+      "text": "Caffeine\n\nCaffeine can help some runners feel more alert, but it can also cause jitters or stomach issues. Use only amounts that have been tested before important runs.\n\nIf the runner does not normally use caffeine, do not suggest starting with a large dose on race day.",
+      "word_count": 47,
+      "citations": []
+    },
+    {
+      "id": "knowledge-nutrition-008",
+      "layer": "knowledge",
+      "source": "nutrition.md",
+      "source_path": "data/knowledge/nutrition.md",
+      "document_title": "Nutrition",
+      "heading": "Sensitive Stomach",
+      "text": "Sensitive Stomach\n\nIf a runner has stomach issues, simplify the pre-run meal, avoid unfamiliar foods, reduce fat and fiber close to the run, and test changes during training.\n\nPersistent digestive problems should be discussed with a qualified professional.",
+      "word_count": 39,
+      "citations": []
+    },
+    {
+      "id": "knowledge-race-day-001",
+      "layer": "knowledge",
+      "source": "race_day.md",
+      "source_path": "data/knowledge/race_day.md",
+      "document_title": "Race Day",
+      "heading": "Nothing New",
+      "text": "Nothing New\n\nDo not try new shoes, socks, gels, caffeine, breakfast, or warmup routines on race day. Race day should repeat what already worked in training.\n\nIf a runner has not practiced a product or routine, keep the race plan simple and familiar.",
+      "word_count": 43,
+      "citations": []
+    },
+    {
+      "id": "knowledge-race-day-002",
+      "layer": "knowledge",
+      "source": "race_day.md",
+      "source_path": "data/knowledge/race_day.md",
+      "document_title": "Race Day",
+      "heading": "Pre-Race Timing",
+      "text": "Pre-Race Timing\n\nArrive early enough to use the bathroom, check gear, warm up, and reach the start without rushing. Rushing before the start can raise stress and lead to poor pacing.\n\nFor morning races, eat a familiar breakfast that has worked before training runs. Keep the meal simple and easy to digest.",
+      "word_count": 53,
+      "citations": []
+    },
+    {
+      "id": "knowledge-race-day-003",
+      "layer": "knowledge",
+      "source": "race_day.md",
+      "source_path": "data/knowledge/race_day.md",
+      "document_title": "Race Day",
+      "heading": "Warmup",
+      "text": "Warmup\n\nFor a 5K or 10K, warm up with 10 to 20 minutes of easy jogging, light drills, and 3 to 5 relaxed strides. The goal is to feel awake, not tired.\n\nFor a half marathon or marathon, use a shorter warmup unless the runner is experienced. Save energy for the race and rely on the first miles to settle in.",
+      "word_count": 61,
+      "citations": []
+    },
+    {
+      "id": "knowledge-race-day-004",
+      "layer": "knowledge",
+      "source": "race_day.md",
+      "source_path": "data/knowledge/race_day.md",
+      "document_title": "Race Day",
+      "heading": "Pacing",
+      "text": "Pacing\n\nMost runners race better with a controlled start. The first part of the race should feel slightly easier than the final part.\n\nIf the runner starts too fast, advise them to relax, settle into goal effort, and avoid panic. One fast split does not ruin a race if they correct early.",
+      "word_count": 52,
+      "citations": []
+    },
+    {
+      "id": "knowledge-race-day-005",
+      "layer": "knowledge",
+      "source": "race_day.md",
+      "source_path": "data/knowledge/race_day.md",
+      "document_title": "Race Day",
+      "heading": "5K Race Strategy",
+      "text": "5K Race Strategy\n\nA 5K should start controlled but assertive. The first kilometer should not feel like a sprint. The middle section requires focus, and the final kilometer is where the runner can press harder.\n\nIf the runner is nervous, suggest using the first 3 minutes to settle breathing and rhythm before judging the pace.",
+      "word_count": 55,
+      "citations": []
+    },
+    {
+      "id": "knowledge-race-day-006",
+      "layer": "knowledge",
+      "source": "race_day.md",
+      "source_path": "data/knowledge/race_day.md",
+      "document_title": "Race Day",
+      "heading": "10K Race Strategy",
+      "text": "10K Race Strategy\n\nA 10K requires patience. The first half should feel controlled and repeatable. If the runner feels strong after halfway, they can gradually increase effort.\n\nGoing out too fast in a 10K often causes a large slowdown late, so controlled early pacing matters.",
+      "word_count": 45,
+      "citations": []
+    },
+    {
+      "id": "knowledge-race-day-007",
+      "layer": "knowledge",
+      "source": "race_day.md",
+      "source_path": "data/knowledge/race_day.md",
+      "document_title": "Race Day",
+      "heading": "Half Marathon Strategy",
+      "text": "Half Marathon Strategy\n\nA half marathon should begin at a sustainable rhythm. The runner should avoid racing the first 5K too hard. The key section is often from 10K to 18K, where focus and fueling matter.\n\nIf the runner has a goal pace, use the first few miles to lock into rhythm rather than chasing every small GPS fluctuation.",
+      "word_count": 59,
+      "citations": []
+    },
+    {
+      "id": "knowledge-race-day-008",
+      "layer": "knowledge",
+      "source": "race_day.md",
+      "source_path": "data/knowledge/race_day.md",
+      "document_title": "Race Day",
+      "heading": "Marathon Strategy",
+      "text": "Marathon Strategy\n\nThe marathon rewards restraint. The first half should feel controlled. If the runner is working hard early, they are likely running too fast.\n\nFueling should start early, before the runner feels depleted. Waiting until energy drops is usually too late.",
+      "word_count": 42,
+      "citations": []
+    },
+    {
+      "id": "knowledge-race-day-009",
+      "layer": "knowledge",
+      "source": "race_day.md",
+      "source_path": "data/knowledge/race_day.md",
+      "document_title": "Race Day",
+      "heading": "Bad Weather",
+      "text": "Bad Weather\n\nIn heat or humidity, slow the pace and prioritize effort. In strong wind, tuck into groups when possible and avoid surging too hard into headwinds.\n\nWeather-adjusted pacing is smart racing, not failure.",
+      "word_count": 35,
+      "citations": []
+    },
+    {
+      "id": "knowledge-race-day-010",
+      "layer": "knowledge",
+      "source": "race_day.md",
+      "source_path": "data/knowledge/race_day.md",
+      "document_title": "Race Day",
+      "heading": "Post-Race",
+      "text": "Post-Race\n\nAfter finishing, walk for a few minutes, hydrate, eat something familiar, and change into dry clothes if needed. Hard races often require several easy days before normal training resumes.",
+      "word_count": 31,
+      "citations": []
+    },
+    {
+      "id": "knowledge-training-paces-001",
+      "layer": "knowledge",
+      "source": "training_paces.md",
+      "source_path": "data/knowledge/training_paces.md",
+      "document_title": "Training Paces",
+      "heading": "Easy Pace",
+      "text": "Easy Pace\n\nEasy pace should feel conversational. The runner should be able to speak in full sentences without gasping. Most weekly running should be easy because it builds aerobic capacity while keeping recovery costs low.\n\nIf the runner is unsure of pace, use effort first. Easy pace is usually around 3 to 4 out of 10 effort, or a pace that feels controlled enough to repeat the next day.",
+      "word_count": 69,
+      "citations": []
+    },
+    {
+      "id": "knowledge-training-paces-002",
+      "layer": "knowledge",
+      "source": "training_paces.md",
+      "source_path": "data/knowledge/training_paces.md",
+      "document_title": "Training Paces",
+      "heading": "Long Run Pace",
+      "text": "Long Run Pace\n\nLong runs are usually done at easy effort. The goal is time on feet, aerobic endurance, and durability, not proving fitness every weekend.\n\nIf a runner fades badly late in long runs, start slower, reduce the route distance, or add short fueling and hydration practice before increasing pace.",
+      "word_count": 51,
+      "citations": []
+    },
+    {
+      "id": "knowledge-training-paces-003",
+      "layer": "knowledge",
+      "source": "training_paces.md",
+      "source_path": "data/knowledge/training_paces.md",
+      "document_title": "Training Paces",
+      "heading": "Tempo Pace",
+      "text": "Tempo Pace\n\nTempo running is comfortably hard. The runner should be able to speak short phrases, but not hold a relaxed conversation. Tempo work improves sustained speed and mental control.\n\nFor newer runners, tempo can be done as intervals such as 3 x 6 minutes at comfortably hard effort with easy jogging between reps.",
+      "word_count": 54,
+      "citations": []
+    },
+    {
+      "id": "knowledge-training-paces-004",
+      "layer": "knowledge",
+      "source": "training_paces.md",
+      "source_path": "data/knowledge/training_paces.md",
+      "document_title": "Training Paces",
+      "heading": "Threshold Pace",
+      "text": "Threshold Pace\n\nThreshold pace is around the fastest effort a runner can hold steadily for about 45 to 60 minutes when fit and rested. It should feel controlled, not like a race sprint.\n\nThreshold workouts should end with the runner feeling like they could do a little more. If the last rep becomes a survival effort, the pace is too fast.",
+      "word_count": 61,
+      "citations": []
+    },
+    {
+      "id": "knowledge-training-paces-005",
+      "layer": "knowledge",
+      "source": "training_paces.md",
+      "source_path": "data/knowledge/training_paces.md",
+      "document_title": "Training Paces",
+      "heading": "Interval Pace",
+      "text": "Interval Pace\n\nInterval pace is used for shorter repeats such as 400 meters, 800 meters, or 3 minute efforts. The goal is quality running mechanics and speed development, not exhaustion.\n\nRecovery between interval reps should be long enough to keep form clean. If form falls apart, slow down or stop the workout.",
+      "word_count": 52,
+      "citations": []
+    },
+    {
+      "id": "knowledge-training-paces-006",
+      "layer": "knowledge",
+      "source": "training_paces.md",
+      "source_path": "data/knowledge/training_paces.md",
+      "document_title": "Training Paces",
+      "heading": "Strides",
+      "text": "Strides\n\nStrides are short accelerations of about 10 to 25 seconds. They should feel fast but relaxed, with smooth form and full control.\n\nStrides are useful after easy runs, before workouts, or during a warmup. They are not all-out sprints.",
+      "word_count": 41,
+      "citations": []
+    },
+    {
+      "id": "knowledge-training-paces-007",
+      "layer": "knowledge",
+      "source": "training_paces.md",
+      "source_path": "data/knowledge/training_paces.md",
+      "document_title": "Training Paces",
+      "heading": "Race Pace",
+      "text": "Race Pace\n\nRace pace is specific to the target distance. A 5K pace should feel challenging early and very hard late. A marathon pace should feel controlled early and require patience.\n\nIf race pace feels impossible during training, use shorter reps at race pace with recovery instead of forcing a continuous effort too soon.",
+      "word_count": 54,
+      "citations": []
+    },
+    {
+      "id": "knowledge-training-paces-008",
+      "layer": "knowledge",
+      "source": "training_paces.md",
+      "source_path": "data/knowledge/training_paces.md",
+      "document_title": "Training Paces",
+      "heading": "Pace Adjustments",
+      "text": "Pace Adjustments\n\nHeat, humidity, hills, wind, poor sleep, stress, and accumulated fatigue should all slow target paces. PaceUp should encourage runners to adjust by effort rather than forcing a watch number.\n\nWhen in doubt, start easier. A workout that is slightly too easy is usually more useful than one that is too hard and disrupts the next several days.",
+      "word_count": 59,
+      "citations": []
+    },
+    {
+      "id": "evidence-fueling-001",
+      "layer": "evidence",
+      "source": "fueling.md",
+      "source_path": "data/evidence/fueling.md",
+      "document_title": "Fueling Evidence",
+      "heading": "Carbohydrate intake during longer hard exercise supports endurance performance",
+      "text": "Carbohydrate intake during longer hard exercise supports endurance performance\n\nEvidence summary:\nSports nutrition position stands support carbohydrate intake during extended moderate to high intensity exercise, especially when sessions last longer than about 60 to 70 minutes. A commonly recommended range is about 30 to 60 grams of carbohydrate per hour, adjusted for duration, intensity, tolerance, and the runner's gut training.\n\nPractical PaceUp use:\nFor long runs, races, or hard sessions longer than about 75 to 90 minutes, suggest practicing carbohydrate intake during training. Start conservatively if the runner is new to fueling and increase only as tolerated.",
+      "word_count": 98,
+      "citations": [
+        {
+          "title": "International society of sports nutrition position stand: nutrient timing",
+          "authors": "Chad M. Kerksick, Shawn Arent, Brad J. Schoenfeld, Jeffrey R. Stout, Bill Campbell, and colleagues",
+          "year": "2017",
+          "source_type": "Position stand",
+          "doi": "10.1186/s12970-017-0189-4",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28919842/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-fueling-002",
+      "layer": "evidence",
+      "source": "fueling.md",
+      "source_path": "data/evidence/fueling.md",
+      "document_title": "Fueling Evidence",
+      "heading": "Nutrition strategies should be individualized to the athlete and event",
+      "text": "Nutrition strategies should be individualized to the athlete and event\n\nEvidence summary:\nThe joint position statement from the Academy of Nutrition and Dietetics, Dietitians of Canada, and the American College of Sports Medicine states that well-chosen nutrition strategies can support performance and recovery. It emphasizes tailoring food, fluid, and supplement choices to training status, event demands, and individual tolerance.\n\nPractical PaceUp use:\nAvoid one-size-fits-all fueling. Ask about race distance, session duration, stomach tolerance, prior gel use, and meal timing when giving detailed fueling advice.",
+      "word_count": 88,
+      "citations": [
+        {
+          "title": "Position of the Academy of Nutrition and Dietetics, Dietitians of Canada, and the American College of Sports Medicine: Nutrition and Athletic Performance",
+          "authors": "D. Travis Thomas, Kelly Anne Erdman, Louise M. Burke",
+          "year": "2016",
+          "source_type": "Joint position statement",
+          "doi": "10.1016/j.jand.2015.12.006",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/26920240/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-fueling-003",
+      "layer": "evidence",
+      "source": "fueling.md",
+      "source_path": "data/evidence/fueling.md",
+      "document_title": "Fueling Evidence",
+      "heading": "Acute carbohydrate feeding can improve endurance performance, but context matters",
+      "text": "Acute carbohydrate feeding can improve endurance performance, but context matters\n\nEvidence summary:\nA systematic review and meta-analysis of carbohydrate intake during endurance exercise found an overall performance benefit compared with placebo or control conditions. Effects varied by test type, with larger effects generally seen in time-to-exhaustion protocols than in time trials.\n\nPractical PaceUp use:\nFor race-specific advice, frame carbs as a tool that helps preserve effort over longer or harder work, not as magic. Encourage practice before race day and use the runner's tolerance to choose form and timing.",
+      "word_count": 94,
+      "citations": [
+        {
+          "title": "The ergogenic effects of acute carbohydrate feeding on endurance performance: a systematic review, meta-analysis and meta-regression",
+          "authors": "Domingo Jesus Ramos-Campo and colleagues",
+          "year": "2024",
+          "source_type": "Systematic review and meta-analysis",
+          "doi": "10.1080/10408398.2023.2233633",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37449467/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-fueling-004",
+      "layer": "evidence",
+      "source": "fueling.md",
+      "source_path": "data/evidence/fueling.md",
+      "document_title": "Fueling Evidence",
+      "heading": "Post-exercise fueling matters most when recovery time is short",
+      "text": "Post-exercise fueling matters most when recovery time is short\n\nEvidence summary:\nNutrient timing guidance emphasizes carbohydrate restoration after high-volume or intense exercise, especially when the next session is soon. Combining carbohydrate with protein can support recovery goals when total daily intake and timing are both relevant.\n\nPractical PaceUp use:\nAfter long runs, races, or hard workouts, recommend a familiar meal or snack with carbohydrates and protein. Emphasize this more strongly when the runner has another workout within 24 hours.",
+      "word_count": 81,
+      "citations": [
+        {
+          "title": "International society of sports nutrition position stand: nutrient timing",
+          "authors": "Chad M. Kerksick, Shawn Arent, Brad J. Schoenfeld, Jeffrey R. Stout, Bill Campbell, and colleagues",
+          "year": "2017",
+          "source_type": "Position stand",
+          "doi": "10.1186/s12970-017-0189-4",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5596471/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-hydration-001",
+      "layer": "evidence",
+      "source": "hydration.md",
+      "source_path": "data/evidence/hydration.md",
+      "document_title": "Hydration Evidence",
+      "heading": "Hydration plans should be individualized",
+      "text": "Hydration plans should be individualized\n\nEvidence summary:\nThe American College of Sports Medicine position stand on exercise and fluid replacement emphasizes starting exercise in a normal hydration state and personalizing fluid replacement because sweat rate and sweat sodium loss vary widely between individuals.\n\nPractical PaceUp use:\nDo not give a single fluid number for every runner. Ask about duration, weather, sweat rate, salt marks, stomach tolerance, and access to fluids. For long races, encourage testing the plan in training.",
+      "word_count": 79,
+      "citations": [
+        {
+          "title": "Exercise and Fluid Replacement",
+          "authors": "Michael N. Sawka, Louise M. Burke, E. Randy Eichner, Ronald J. Maughan, Scott J. Montain, Nina S. Stachenfeld",
+          "year": "2007",
+          "source_type": "ACSM position stand",
+          "doi": "10.1249/mss.0b013e31802ca597",
+          "url": "https://journals.lww.com/acsm-msse/Fulltext/2007/02000/Exercise_and_Fluid_Replacement.22.aspx"
+        }
+      ]
+    },
+    {
+      "id": "evidence-hydration-002",
+      "layer": "evidence",
+      "source": "hydration.md",
+      "source_path": "data/evidence/hydration.md",
+      "document_title": "Hydration Evidence",
+      "heading": "Large fluid losses can impair endurance performance",
+      "text": "Large fluid losses can impair endurance performance\n\nEvidence summary:\nA comprehensive physiology review reports that dehydration can impair endurance performance, with commonly discussed impairment thresholds around body mass losses of about 2 percent in many endurance contexts. The exact impact depends on environment, exercise mode, intensity, and the type of fluid loss.\n\nPractical PaceUp use:\nFor long or hot runs, advise runners to limit large dehydration rather than chasing exact body weight replacement every time. Encourage practical checks such as body mass change in training, thirst, urine color, and symptoms.",
+      "word_count": 90,
+      "citations": [
+        {
+          "title": "Dehydration: physiology, assessment, and performance effects",
+          "authors": "Samuel N. Cheuvront, Robert W. Kenefick",
+          "year": "2014",
+          "source_type": "Review",
+          "doi": "10.1002/cphy.c130017",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24692140/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-hydration-003",
+      "layer": "evidence",
+      "source": "hydration.md",
+      "source_path": "data/evidence/hydration.md",
+      "document_title": "Hydration Evidence",
+      "heading": "Avoid both dehydration and overdrinking",
+      "text": "Avoid both dehydration and overdrinking\n\nEvidence summary:\nThe ACSM fluid replacement position stand focuses on preventing excessive dehydration and excessive electrolyte disturbance. A runner's safest plan is usually personalized drinking that accounts for sweat rate, conditions, duration, and sodium needs rather than forcing fluid beyond tolerance.\n\nPractical PaceUp use:\nDo not tell runners to drink as much as possible. For long races, recommend a practiced drinking plan that prevents major fluid deficit while avoiding overdrinking, especially in slower marathoners or very long events.",
+      "word_count": 84,
+      "citations": [
+        {
+          "title": "Exercise and Fluid Replacement",
+          "authors": "Michael N. Sawka, Louise M. Burke, E. Randy Eichner, Ronald J. Maughan, Scott J. Montain, Nina S. Stachenfeld",
+          "year": "2007",
+          "source_type": "ACSM position stand",
+          "doi": "10.1249/mss.0b013e31802ca597",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/17277604/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-hydration-004",
+      "layer": "evidence",
+      "source": "hydration.md",
+      "source_path": "data/evidence/hydration.md",
+      "document_title": "Hydration Evidence",
+      "heading": "Heat and humidity should shift advice from pace to effort",
+      "text": "Heat and humidity should shift advice from pace to effort\n\nEvidence summary:\nHydration and thermoregulation research shows that fluid balance, heat stress, and cardiovascular strain interact during endurance exercise. Hot and humid conditions raise the cost of maintaining a given pace, so performance targets often need adjustment.\n\nPractical PaceUp use:\nIn heat or humidity, advise runners to slow pace targets, use effort and heart rate cautiously, consider earlier fluids, and reduce workout ambition if symptoms appear.",
+      "word_count": 76,
+      "citations": [
+        {
+          "title": "Physiological adjustments to hypohydration: Impact on thermoregulation",
+          "authors": "Robert W. Kenefick, Samuel N. Cheuvront",
+          "year": "2016",
+          "source_type": "Review",
+          "doi": "10.1016/j.autneu.2016.02.003",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/26944095/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-injury-prevention-001",
+      "layer": "evidence",
+      "source": "injury_prevention.md",
+      "source_path": "data/evidence/injury_prevention.md",
+      "document_title": "Injury Prevention Evidence",
+      "heading": "Novice runners have a higher injury rate than recreational runners",
+      "text": "Novice runners have a higher injury rate than recreational runners\n\nEvidence summary:\nA systematic review and meta-analysis reported higher running-related injury incidence in novice runners than in recreational runners when expressed per 1000 hours of running. This supports conservative progression for beginners.\n\nPractical PaceUp use:\nWhen a beginner asks for a plan, favor run-walk progression, easy effort, rest days, and gradual increases. Avoid giving aggressive speed work early unless the runner already has a base.",
+      "word_count": 78,
+      "citations": [
+        {
+          "title": "Incidence of Running-Related Injuries Per 1000 h of Running in Different Types of Runners: A Systematic Review and Meta-Analysis",
+          "authors": "Solvej Videbaek, Andreas Moeballe Bueno, Rasmus Oestergaard Nielsen, Sten Rasmussen",
+          "year": "2015",
+          "source_type": "Systematic review and meta-analysis",
+          "doi": "10.1007/s40279-015-0333-8",
+          "url": "https://link.springer.com/article/10.1007/s40279-015-0333-8"
+        }
+      ]
+    },
+    {
+      "id": "evidence-injury-prevention-002",
+      "layer": "evidence",
+      "source": "injury_prevention.md",
+      "source_path": "data/evidence/injury_prevention.md",
+      "document_title": "Injury Prevention Evidence",
+      "heading": "Running injury risk is multifactorial",
+      "text": "Running injury risk is multifactorial\n\nEvidence summary:\nSystematic review evidence suggests that running-related injuries are influenced by a mix of training characteristics, health and lifestyle factors, morphology, biomechanics, and prior injury history. The evidence base is heterogeneous, so single-factor explanations should be avoided.\n\nPractical PaceUp use:\nIf a runner reports repeated injuries, do not blame only shoes, cadence, or mileage. Review recent training changes, recovery, sleep, strength, terrain, prior injuries, pain behavior, and weekly load.",
+      "word_count": 77,
+      "citations": [
+        {
+          "title": "Risk factors for running-related injuries: An umbrella systematic review",
+          "authors": "Clara Knierim Correia, Jean Marlon Machado, Fabio Hech Dominski, Marcelo Peduzzi de Castro, Heiliane de Brito Fontana, Caroline Ruschel",
+          "year": "2024",
+          "source_type": "Umbrella systematic review",
+          "doi": "10.1016/j.jshs.2024.04.011",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38697289/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-injury-prevention-003",
+      "layer": "evidence",
+      "source": "injury_prevention.md",
+      "source_path": "data/evidence/injury_prevention.md",
+      "document_title": "Injury Prevention Evidence",
+      "heading": "Sudden training-load changes may increase risk, but evidence is not simple",
+      "text": "Sudden training-load changes may increase risk, but evidence is not simple\n\nEvidence summary:\nA systematic review on changes in training load found limited eligible evidence. Several included studies associated recent increases in distance, velocity, or frequency with higher injury risk, but the review cautioned that the compiled evidence was not strong enough for a single precise rule.\n\nPractical PaceUp use:\nUse conservative progression as a coaching default, but avoid pretending that a universal rule such as \"10 percent per week\" is guaranteed. Adjust progression based on runner history, symptoms, recovery, and training age.",
+      "word_count": 94,
+      "citations": [
+        {
+          "title": "Is there evidence for an association between changes in training load and running-related injuries? A systematic review",
+          "authors": "Camma Damsted, Simone Glad, Rasmus Oestergaard Nielsen, Henrik Sorensen, Laurent Malisoux",
+          "year": "2018",
+          "source_type": "Systematic review",
+          "pmid": "30534459",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30534459/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-injury-prevention-004",
+      "layer": "evidence",
+      "source": "injury_prevention.md",
+      "source_path": "data/evidence/injury_prevention.md",
+      "document_title": "Injury Prevention Evidence",
+      "heading": "Training-error evidence is mixed, so advice should stay cautious",
+      "text": "Training-error evidence is mixed, so advice should stay cautious\n\nEvidence summary:\nA systematic review of training errors and running-related injuries found conflicting results across studies examining volume, duration, frequency, and intensity. The methodological quality of included studies was limited.\n\nPractical PaceUp use:\nWhen discussing injury prevention, recommend cautious load management and monitoring rather than claiming one training variable always causes injury. Encourage runners to respond early to pain and fatigue.",
+      "word_count": 72,
+      "citations": [
+        {
+          "title": "Training errors and running related injuries: a systematic review",
+          "authors": "Rasmus Oestergaard Nielsen, Ida Buist, Henrik Sorensen, Martin Lind, Sten Rasmussen",
+          "year": "2012",
+          "source_type": "Systematic review",
+          "pmid": "22389869",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/22389869/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-injury-prevention-005",
+      "layer": "evidence",
+      "source": "injury_prevention.md",
+      "source_path": "data/evidence/injury_prevention.md",
+      "document_title": "Injury Prevention Evidence",
+      "heading": "Gait retraining can change loading variables, but injury prevention claims should be careful",
+      "text": "Gait retraining can change loading variables, but injury prevention claims should be careful\n\nEvidence summary:\nSystematic review evidence suggests gait retraining can change running mechanics such as step rate and loading variables. However, direct evidence that these changes prevent injuries is still limited.\n\nPractical PaceUp use:\nDo not prescribe cadence changes to every runner. Consider gait cues only when there is a clear reason, and keep changes small and gradual.",
+      "word_count": 70,
+      "citations": [
+        {
+          "title": "The Effectiveness of Gait Retraining on Running Kinematics, Kinetics, Performance, Pain, and Injury in Distance Runners: A Systematic Review With Meta-analysis",
+          "authors": "Eoin Doyle, Tim L. A. Doyle, Jason Bonacci, Joel T. Fuller",
+          "year": "2022",
+          "source_type": "Systematic review and meta-analysis",
+          "doi": "10.2519/jospt.2022.10585",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35128941/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-recovery-sleep-001",
+      "layer": "evidence",
+      "source": "recovery_sleep.md",
+      "source_path": "data/evidence/recovery_sleep.md",
+      "document_title": "Recovery And Sleep Evidence",
+      "heading": "Sleep extension and naps are promising athlete sleep interventions",
+      "text": "Sleep extension and naps are promising athlete sleep interventions\n\nEvidence summary:\nA systematic review of sleep interventions in competitive athletes found that sleep extension had the most consistent beneficial effects on subsequent performance among the intervention types reviewed. The evidence base was still limited, with small samples and varied sports.\n\nPractical PaceUp use:\nWhen a runner is tired or underperforming, suggest increasing sleep opportunity before adding training. Short naps can be useful when nighttime sleep is restricted, but they should not replace adequate regular sleep.",
+      "word_count": 85,
+      "citations": [
+        {
+          "title": "Sleep Interventions Designed to Improve Athletic Performance and Recovery: A Systematic Review of Current Approaches",
+          "authors": "Daniel Bonnar, Kate Bartel, Naomi Kakoschke, Christin Lang",
+          "year": "2018",
+          "source_type": "Systematic review",
+          "doi": "10.1007/s40279-017-0832-x",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29352373/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-recovery-sleep-002",
+      "layer": "evidence",
+      "source": "recovery_sleep.md",
+      "source_path": "data/evidence/recovery_sleep.md",
+      "document_title": "Recovery And Sleep Evidence",
+      "heading": "Athletes often sleep less than general recommendations",
+      "text": "Athletes often sleep less than general recommendations\n\nEvidence summary:\nA systematic review using objective sleep measures found that athletes averaged less than 8 hours of sleep per night across included datasets. Sleep duration and efficiency varied by age, sport, and training period, with heavy training periods associated with shorter sleep and lower sleep efficiency.\n\nPractical PaceUp use:\nAsk about sleep when runners report fatigue, irritability, soreness, or stalled progress. Treat poor sleep as a training variable, not just a lifestyle detail.",
+      "word_count": 81,
+      "citations": [
+        {
+          "title": "Deconstructing athletes' sleep: A systematic review of the influence of age, sex, athletic expertise, sport type, and season on sleep characteristics",
+          "authors": "Angelos Vlahoyiannis, George Aphamis, Gregory C. Bogdanis, Giorgos K. Sakkas, Eleni Andreou, Christoforos D. Giannaki",
+          "year": "2021",
+          "source_type": "Systematic review",
+          "doi": "10.1016/j.jshs.2020.03.006",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32325024/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-recovery-sleep-003",
+      "layer": "evidence",
+      "source": "recovery_sleep.md",
+      "source_path": "data/evidence/recovery_sleep.md",
+      "document_title": "Recovery And Sleep Evidence",
+      "heading": "Sleep loss can affect sport-specific and cognitive performance",
+      "text": "Sleep loss can affect sport-specific and cognitive performance\n\nEvidence summary:\nA review on sleep loss and athletic performance found mixed effects across physical tasks, but noted concerns for sport-specific performance, cognitive performance, mood, immune function, and physiological stress responses.\n\nPractical PaceUp use:\nIf a runner slept poorly before a hard workout, suggest reducing intensity, shifting the workout, or using effort-based targets. Poor sleep is a valid reason to adjust training.",
+      "word_count": 73,
+      "citations": [
+        {
+          "title": "Sleep and athletic performance: the effects of sleep loss on exercise performance, and physiological and cognitive responses to exercise",
+          "authors": "Hugh H. K. Fullagar, Sabrina Skorski, Rob Duffield, Daniel Hammes, Aaron J. Coutts, Tim Meyer",
+          "year": "2015",
+          "source_type": "Review",
+          "doi": "10.1007/s40279-014-0260-0",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/25315456/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-recovery-sleep-004",
+      "layer": "evidence",
+      "source": "recovery_sleep.md",
+      "source_path": "data/evidence/recovery_sleep.md",
+      "document_title": "Recovery And Sleep Evidence",
+      "heading": "Sleep interventions may help performance, but claims should stay measured",
+      "text": "Sleep interventions may help performance, but claims should stay measured\n\nEvidence summary:\nA later systematic review of athlete sleep interventions found that sleep extension and naps were among the most representative and effective strategies for improving sleep and performance outcomes. The authors still emphasized limitations in study quality and the need for more research.\n\nPractical PaceUp use:\nRecommend realistic sleep extension and naps as recovery tools, but avoid guaranteeing performance gains. Use sleep guidance especially during heavy training blocks, taper weeks, travel, and race week.",
+      "word_count": 85,
+      "citations": [
+        {
+          "title": "The Impact of Sleep Interventions on Athletic Performance: A Systematic Review",
+          "authors": "Lucio A. Cunha, Julio A. Costa, Elisa A. Marques, Joao Brito, Michele Lastella, Pedro Figueiredo",
+          "year": "2023",
+          "source_type": "Systematic review",
+          "doi": "10.1186/s40798-023-00599-z",
+          "pmid": "37462808",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10354314/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-strength-training-001",
+      "layer": "evidence",
+      "source": "strength_training.md",
+      "source_path": "data/evidence/strength_training.md",
+      "document_title": "Strength Training Evidence",
+      "heading": "Strength training can improve running economy and performance markers",
+      "text": "Strength training can improve running economy and performance markers\n\nEvidence summary:\nA systematic review of middle- and long-distance runners found that strength training often improves running economy and some time-trial or sprint performance outcomes. The review did not find consistent negative effects on body composition.\n\nPractical PaceUp use:\nRecommend 2 to 3 strength sessions per week for runners when recovery allows. Prioritize consistency and progressive loading over long, exhausting gym sessions.",
+      "word_count": 73,
+      "citations": [
+        {
+          "title": "Effects of Strength Training on the Physiological Determinants of Middle- and Long-Distance Running Performance: A Systematic Review",
+          "authors": "Richard C. Blagrove, Glyn Howatson, Philip R. Hayes",
+          "year": "2018",
+          "source_type": "Systematic review",
+          "doi": "10.1007/s40279-017-0835-7",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29249083/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-strength-training-002",
+      "layer": "evidence",
+      "source": "strength_training.md",
+      "source_path": "data/evidence/strength_training.md",
+      "document_title": "Strength Training Evidence",
+      "heading": "Heavy resistance, plyometric, and combined methods can be useful",
+      "text": "Heavy resistance, plyometric, and combined methods can be useful\n\nEvidence summary:\nA 2024 systematic review and meta-analysis found that strength training can improve running economy, with effects depending on method and speed. High-load and combined methods showed benefits in some speed ranges, and plyometric training showed benefits in lower speed ranges. Certainty varied by method.\n\nPractical PaceUp use:\nFor healthy runners, combine basic heavy strength, calf and hip work, and low-volume plyometrics after a foundation phase. For beginners or injury-prone runners, start with simple controlled strength before adding jumps.",
+      "word_count": 93,
+      "citations": [
+        {
+          "title": "Effect of Strength Training Programs in Middle- and Long-Distance Runners' Economy at Different Running Speeds: A Systematic Review with Meta-analysis",
+          "authors": "Cristian Llanos-Lagos, Rodrigo Ramirez-Campillo, Jason Moran, Eduardo Saez de Villarreal",
+          "year": "2024",
+          "source_type": "Systematic review and meta-analysis",
+          "doi": "10.1007/s40279-023-01978-y",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38165636/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-strength-training-003",
+      "layer": "evidence",
+      "source": "strength_training.md",
+      "source_path": "data/evidence/strength_training.md",
+      "document_title": "Strength Training Evidence",
+      "heading": "Strength work should not replace too much running specificity",
+      "text": "Strength work should not replace too much running specificity\n\nEvidence summary:\nStrength training can support running economy and performance determinants, but endurance performance still depends heavily on consistent running, aerobic development, and event-specific work. Strength should complement, not crowd out, the key running sessions.\n\nPractical PaceUp use:\nPlace strength on easy days or after quality sessions when appropriate, leaving enough recovery before hard workouts and long runs. Reduce gym volume during race week or when fatigue is high.",
+      "word_count": 79,
+      "citations": [
+        {
+          "title": "Effects of Strength Training on the Physiological Determinants of Middle- and Long-Distance Running Performance: A Systematic Review",
+          "authors": "Richard C. Blagrove, Glyn Howatson, Philip R. Hayes",
+          "year": "2018",
+          "source_type": "Systematic review",
+          "doi": "10.1007/s40279-017-0835-7",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5889786/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-strength-training-004",
+      "layer": "evidence",
+      "source": "strength_training.md",
+      "source_path": "data/evidence/strength_training.md",
+      "document_title": "Strength Training Evidence",
+      "heading": "Strength training supports economy more than VO2max",
+      "text": "Strength training supports economy more than VO2max\n\nEvidence summary:\nAn umbrella review of systematic reviews and meta-analyses reported moderate to large effects on running economy across included reviews, while VO2max generally did not show meaningful change. The authors also noted limitations in review quality.\n\nPractical PaceUp use:\nExplain strength work as a durability and economy tool, not mainly a VO2max tool. It can help the runner use energy more efficiently and tolerate training better.",
+      "word_count": 75,
+      "citations": [
+        {
+          "title": "The Effect of Strength Training on Endurance Performance Determinants in Middle- and Long-Distance Endurance Athletes: An Umbrella Review of Systematic Reviews and Meta-Analysis",
+          "authors": "Domingo J. Ramos-Campo, Luis Andreu-Caravaca, Vicente J. Clemente-Suarez, Jacobo A. Rubio-Arias",
+          "year": "2025",
+          "source_type": "Umbrella review",
+          "doi": "10.1519/JSC.0000000000005056",
+          "pmid": "40153564",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40153564/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-tapering-001",
+      "layer": "evidence",
+      "source": "tapering.md",
+      "source_path": "data/evidence/tapering.md",
+      "document_title": "Tapering Evidence",
+      "heading": "Reducing volume while keeping intensity can improve race readiness",
+      "text": "Reducing volume while keeping intensity can improve race readiness\n\nEvidence summary:\nA meta-analysis of competitive athletes found that tapering can improve performance when training volume is reduced while intensity and frequency are mostly maintained. The clearest signal favored a taper of about 2 weeks with a substantial volume reduction.\n\nPractical PaceUp use:\nFor goal races, recommend reducing total workload during the final 1 to 2 weeks while keeping a small amount of controlled faster running. Avoid removing all intensity unless fatigue, injury, or illness requires it.",
+      "word_count": 87,
+      "citations": [
+        {
+          "title": "Effects of tapering on performance: a meta-analysis",
+          "authors": "Laurent Bosquet, Jonathan Montpetit, Denis Arvisais, Inigo Mujika",
+          "year": "2007",
+          "source_type": "Meta-analysis",
+          "doi": "10.1249/mss.0b013e31806010e0",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/17762369/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-tapering-002",
+      "layer": "evidence",
+      "source": "tapering.md",
+      "source_path": "data/evidence/tapering.md",
+      "document_title": "Tapering Evidence",
+      "heading": "Tapering should reduce fatigue without losing fitness",
+      "text": "Tapering should reduce fatigue without losing fitness\n\nEvidence summary:\nA review by Mujika and Padilla described tapering as a planned reduction in training load before competition. The aim is to lower accumulated fatigue while preserving training adaptations. Their review supports maintaining intensity, reducing volume, and avoiding a large drop in training frequency for most competitive athletes.\n\nPractical PaceUp use:\nWhen a runner asks how to taper, explain that the goal is to feel fresh but still sharp. Replace long or hard sessions with shorter versions rather than stopping structured running entirely.",
+      "word_count": 91,
+      "citations": [
+        {
+          "title": "Scientific Bases for Precompetition Tapering Strategies",
+          "authors": "Inigo Mujika, Sabino Padilla",
+          "year": "2003",
+          "source_type": "Review",
+          "doi": "10.1249/01.MSS.0000074448.73931.11",
+          "url": "https://journals.lww.com/acsm-msse/Fulltext/2003/07000/Scientific_Bases_for_Precompetition_Tapering.17.aspx"
+        }
+      ]
+    },
+    {
+      "id": "evidence-tapering-003",
+      "layer": "evidence",
+      "source": "tapering.md",
+      "source_path": "data/evidence/tapering.md",
+      "document_title": "Tapering Evidence",
+      "heading": "Taper advice should scale with race distance and runner experience",
+      "text": "Taper advice should scale with race distance and runner experience\n\nEvidence summary:\nTaper studies include competitive athletes across endurance sports, so exact taper prescriptions should not be applied rigidly to every recreational runner. The evidence supports the principle of reduced load, but the exact duration and amount of reduction should depend on race distance, recent fatigue, training age, and injury status.\n\nPractical PaceUp use:\nFor a 5K or 10K, a shorter taper may be enough. For a half marathon or marathon, use a longer reduction in volume, especially if the runner has high mileage or signs of fatigue.",
+      "word_count": 98,
+      "citations": [
+        {
+          "title": "Effects of tapering on performance: a meta-analysis",
+          "authors": "Laurent Bosquet, Jonathan Montpetit, Denis Arvisais, Inigo Mujika",
+          "year": "2007",
+          "source_type": "Meta-analysis",
+          "doi": "10.1249/mss.0b013e31806010e0",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/17762369/"
+        }
+      ]
+    }
+  ]
+}

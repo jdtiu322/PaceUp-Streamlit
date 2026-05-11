@@ -23,6 +23,7 @@ In the app settings, open `Secrets` and paste values based on `.streamlit/secret
 Required top-level secrets:
 - `GEMINI_API_KEY`
 - `GEMINI_MODEL`
+- `GEMINI_EMBEDDING_MODEL` (optional, defaults to `gemini-embedding-001`)
 - `FIREBASE_WEB_API_KEY`
 
 Required Firebase section:
