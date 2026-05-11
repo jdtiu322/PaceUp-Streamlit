@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+import logging
 
 from google import genai
 from google.genai import types
@@ -8,25 +9,24 @@ from google.genai import types
 from config import GEMINI_API_KEY, GEMINI_MODEL
 
 client = genai.Client(api_key=GEMINI_API_KEY) if GEMINI_API_KEY else None
+logger = logging.getLogger(__name__)
 
 
 PROMPT_ATTACK_PATTERNS = [
     r"\bignore (all|any|your|previous) instructions\b",
     r"\bforget (your|all) rules\b",
-    r"\bsystem prompt\b",
-    r"\bhidden instructions\b",
-    r"\bdeveloper (message|prompt|instructions?)\b",
-    r"\bwhat were you told\b",
-    r"\breveal\b.*\b(prompt|instructions|rules)\b",
-    r"\bshow\b.*\b(raw output|hidden prompt|system prompt)\b",
+    r"\b(reveal|expose|print|output|show|repeat|display)\b.{0,40}\b(system prompt|hidden instructions?|internal rules?|secret instructions?)\b",
+    r"\bdeveloper (mode|message|prompt|instructions?)\b",
     r"\bdebug mode\b",
-    r"\braw outputs?\b",
     r"\bdo anything now\b",
-    r"\bdan\b",
+    r"\bDAN\b",
     r"\bevilgpt\b",
-    r"\bunrestricted ai\b",
-    r"\bpretend you are\b",
-    r"\bact as\b.*\b(unrestricted|different ai|developer)\b",
+    r"\bunrestricted (ai|mode|version)\b",
+    r"\bact as\b.{0,40}\b(unrestricted|jailbreak|no (rules|limits|restrictions)|different ai)\b",
+    r"\byou (are|have) no (rules|limits|restrictions|guidelines)\b",
+    r"\bbypass (your )?(rules|safety|restrictions|guidelines|filters)\b",
+    r"\bjailbreak\b",
+    r"\bprompt injection\b",
 ]
 
 
@@ -87,35 +87,66 @@ def guarded_refusal(profile: dict) -> str:
     )
 
 
-def get_gemini_response(messages: list, profile: dict) -> str:
+def _friendly_gemini_error(exc: Exception) -> str:
+    details = str(exc)
+    lower_details = details.lower()
+    retry_match = re.search(r"retry in ([0-9.]+)s", details, re.IGNORECASE)
+    retry_text = ""
+    if retry_match:
+        try:
+            seconds = max(1, round(float(retry_match.group(1))))
+            retry_text = f" Please wait about {seconds} seconds and try again."
+        except ValueError:
+            retry_text = " Please wait a moment and try again."
+
+    if "resource_exhausted" in lower_details or "quota" in lower_details or "429" in details:
+        return (
+            "PaceUp hit the current Gemini usage limit, so I could not generate a reply just now."
+            f"{retry_text or ' Please wait a moment and try again.'}"
+        )
+
+    return "Sorry, PaceUp could not reach Gemini right now. Please try again in a moment."
+
+
+def _build_contents(messages: list) -> list[types.Content]:
+    return [
+        types.Content(
+            role="user" if msg["role"] == "user" else "model",
+            parts=[types.Part.from_text(text=msg["content"])],
+        )
+        for msg in messages
+    ]
+
+
+def stream_gemini_response(messages: list, profile: dict):
     try:
         if client is None:
-            return "Sorry, GEMINI_API_KEY is not configured."
+            yield "Sorry, GEMINI_API_KEY is not configured."
+            return
 
         last_user_message = next(
             (msg["content"] for msg in reversed(messages) if msg.get("role") == "user"),
             "",
         )
         if last_user_message and is_prompt_attack(last_user_message):
-            return guarded_refusal(profile)
+            yield guarded_refusal(profile)
+            return
 
-        contents = []
-        for msg in messages:
-            contents.append(
-                types.Content(
-                    role="user" if msg["role"] == "user" else "model",
-                    parts=[types.Part.from_text(text=msg["content"])],
-                )
-            )
-
-        response = client.models.generate_content(
+        stream = client.models.generate_content_stream(
             model=GEMINI_MODEL,
             config=types.GenerateContentConfig(
                 system_instruction=build_system_prompt(profile),
             ),
-            contents=contents,
+            contents=_build_contents(messages),
         )
-        return response.text
+        for chunk in stream:
+            text = getattr(chunk, "text", None)
+            if text:
+                yield text
     except Exception as exc:
-        return f"Sorry, I ran into an issue: {exc}"
+        logger.exception("Gemini response generation failed.")
+        yield _friendly_gemini_error(exc)
 
+
+def get_gemini_response(messages: list, profile: dict) -> str:
+    return "".join(stream_gemini_response(messages, profile))

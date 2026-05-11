@@ -35,4 +35,5 @@ Required Firebase section:
 
 ## 5. Notes
 - This app now prefers `st.secrets` in deployment and falls back to local `.env` / `firebase_config.json` only for local development.
-- Login persistence across browser refresh is disabled for cloud deployment safety. Users stay signed in only for the active Streamlit session.
+- Local development uses non-secure refresh cookies so `http://localhost` can persist sign-in across browser refreshes.
+- For HTTPS deployment, set `AUTH_COOKIE_SECURE=true` in Streamlit secrets or environment variables.

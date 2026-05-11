@@ -25,6 +25,11 @@ FIREBASE_WEB_API_KEY = get_secret("FIREBASE_WEB_API_KEY", "")
 GEMINI_API_KEY = get_secret("GEMINI_API_KEY", "")
 GEMINI_MODEL = get_secret("GEMINI_MODEL", "gemini-2.5-flash-lite")
 
+_AUTH_COOKIE_SECURE_VALUE = get_secret("AUTH_COOKIE_SECURE", "").strip().lower()
+# Local Streamlit usually runs over http://localhost, where Secure cookies are
+# not persisted. Deployed HTTPS apps can opt in with AUTH_COOKIE_SECURE=true.
+AUTH_COOKIE_SECURE = _AUTH_COOKIE_SECURE_VALUE in {"1", "true", "yes", "on"}
+
 
 @st.cache_data(show_spinner=False)
 def encode_image(name: str) -> str:
@@ -37,12 +42,12 @@ LOGO_IMAGE = encode_image("paceup.png")
 
 ONBOARDING_DAY_OPTIONS = [
     ("Monday", "M"),
-    ("Tuesday", "T"),
+    ("Tuesday", "Tu"),
     ("Wednesday", "W"),
-    ("Thursday", "T"),
+    ("Thursday", "Th"),
     ("Friday", "F"),
-    ("Saturday", "S"),
-    ("Sunday", "S"),
+    ("Saturday", "Sa"),
+    ("Sunday", "Su"),
 ]
 
 ONBOARDING_SEX_OPTIONS = ["Male", "Female", "Other", "Prefer not to say"]
@@ -63,15 +68,12 @@ FITNESS_ALIASES = {
     "NOVICE": "NOVICE",
     "Novice": "NOVICE",
     "Beginner - I rarely run": "NOVICE",
-    "Beginner â€” I rarely run": "NOVICE",
     "INTER": "INTER",
     "Inter": "INTER",
     "Intermediate - I run occasionally": "INTER",
-    "Intermediate â€” I run occasionally": "INTER",
     "ELITE": "ELITE",
     "Elite": "ELITE",
     "Advanced - I run regularly": "ELITE",
-    "Advanced â€” I run regularly": "ELITE",
 }
 
 

@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+</head>
+<body>
+  <script>
+    const STREAMLIT_RENDER = "streamlit:render";
+    const COMPONENT_READY = "streamlit:componentReady";
+    const SET_COMPONENT_VALUE = "streamlit:setComponentValue";
+    const SET_FRAME_HEIGHT = "streamlit:setFrameHeight";
+
+    let lastPayload = "";
+
+    function post(type, payload) {
+      window.parent.postMessage(
+        Object.assign({ isStreamlitMessage: true, type: type }, payload || {}),
+        "*"
+      );
+    }
+
+    function setReady() {
+      post(COMPONENT_READY, { apiVersion: 1 });
+      post(SET_FRAME_HEIGHT, { height: 0 });
+    }
+
+    function emit(value) {
+      const payload = JSON.stringify(value);
+      if (payload === lastPayload) {
+        return;
+      }
+      lastPayload = payload;
+      post(SET_COMPONENT_VALUE, { value: value, dataType: "json" });
+    }
+
+    function cookieAttributes(maxAge, secure) {
+      let attrs = "; Max-Age=" + Number(maxAge || 0) + "; Path=/; SameSite=Lax";
+      if (secure) {
+        attrs += "; Secure";
+      }
+      return attrs;
+    }
+
+    function readCookie(name) {
+      const prefix = name + "=";
+      const parts = (document.cookie || "").split(";");
+      for (let i = 0; i < parts.length; i += 1) {
+        const part = parts[i].trim();
+        if (part.indexOf(prefix) === 0) {
+          try {
+            return decodeURIComponent(part.slice(prefix.length));
+          } catch (e) {
+            return part.slice(prefix.length);
+          }
+        }
+      }
+      return "";
+    }
+
+    function writeCookie(name, token, maxAge, secure) {
+      if (!token) {
+        return;
+      }
+      document.cookie = name + "=" + encodeURIComponent(token) + cookieAttributes(maxAge, secure);
+    }
+
+    function clearCookie(name, secure) {
+      document.cookie = name + "=; Max-Age=0; Path=/; SameSite=Lax";
+      if (secure) {
+        document.cookie = name + "=; Max-Age=0; Path=/; SameSite=Lax; Secure";
+      }
+    }
+
+    function readStorage(name) {
+      try {
+        return window.localStorage.getItem(name) || "";
+      } catch (e) {
+        return "";
+      }
+    }
+
+    function writeStorage(name, token) {
+      try {
+        if (token) {
+          window.localStorage.setItem(name, token);
+        }
+      } catch (e) {}
+    }
+
+    function clearStorage(name) {
+      try {
+        window.localStorage.removeItem(name);
+      } catch (e) {}
+      try {
+        window.sessionStorage.removeItem(name + "_restore_attempted");
+      } catch (e) {}
+    }
+
+    function handleRender(args) {
+      const method = args.method || "get";
+      const name = args.name;
+      const secure = Boolean(args.secure);
+      const maxAge = Number(args.maxAge || 0);
+
+      if (!name) {
+        emit({ ready: true, token: "" });
+        return;
+      }
+
+      if (method === "set") {
+        const token = args.token || "";
+        writeStorage(name, token);
+        writeCookie(name, token, maxAge, secure);
+        try {
+          window.sessionStorage.removeItem(name + "_restore_attempted");
+        } catch (e) {}
+        emit({ ready: true, token: token, stored: Boolean(token) });
+        return;
+      }
+
+      if (method === "clear") {
+        clearStorage(name);
+        clearCookie(name, secure);
+        clearCookie(name, !secure);
+        emit({ ready: true, token: "", cleared: true });
+        return;
+      }
+
+      const cookieToken = readCookie(name);
+      const storageToken = readStorage(name);
+      const token = cookieToken || storageToken || "";
+      if (storageToken && !cookieToken) {
+        writeCookie(name, storageToken, maxAge, secure);
+      }
+      emit({ ready: true, token: token });
+    }
+
+    window.addEventListener("message", function (event) {
+      if (event.data && event.data.type === STREAMLIT_RENDER) {
+        handleRender(event.data.args || {});
+      }
+    });
+
+    setReady();
+  </script>
+</body>
+</html>
