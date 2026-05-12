@@ -70,8 +70,10 @@ How to use it:
 - Prefer this context over general model memory when it is directly relevant to the user's running question.
 - For hydration, fueling, tapering, injury prevention, sleep/recovery, strength training, pacing, and race-day claims, ground the answer in retrieved context when available.
 - Do not mention "RAG", "retrieval", "chunks", or internal context.
+- Do not include bracket citations or context labels such as "[RAG-1]" or "Context item 1" in the answer.
 - Do not invent studies, citations, URLs, or source details.
-- If any retrieved evidence chunk is relevant, include a short "Sources" section with only the provided source titles and URLs.
+- The app displays source metadata separately. Do not add a "Sources", "References", "Citations", or URL section in the answer text.
+- If any retrieved evidence chunk is relevant, use it to improve the answer but leave the source list to the app UI.
 - Do not provide precise numeric ranges, thresholds, or protocols unless they come from the retrieved context or you clearly label them as broad general guidance.
 - For hydration advice, emphasize individualized needs, conditions, sweat rate, duration, and avoiding both dehydration and overdrinking when those ideas appear in context.
 - If the user asks what research says, answer with the evidence first, then give the practical PaceUp takeaway.
@@ -220,7 +222,9 @@ def _build_contents(messages: list) -> list[types.Content]:
     ]
 
 
-def _retrieve_rag_context(user_message: str) -> str:
+def _retrieve_rag_context(user_message: str, rag_chunks: list[dict] | None = None) -> str:
+    if rag_chunks is not None:
+        return format_rag_context(rag_chunks)
     if not user_message:
         return ""
 
@@ -232,7 +236,7 @@ def _retrieve_rag_context(user_message: str) -> str:
         return ""
 
 
-def stream_gemini_response(messages: list, profile: dict):
+def stream_gemini_response(messages: list, profile: dict, rag_chunks: list[dict] | None = None):
     try:
         if client is None:
             yield "Sorry, GEMINI_API_KEY is not configured."
@@ -246,7 +250,7 @@ def stream_gemini_response(messages: list, profile: dict):
             yield guarded_refusal(profile)
             return
 
-        rag_context = _retrieve_rag_context(last_user_message)
+        rag_context = _retrieve_rag_context(last_user_message, rag_chunks=rag_chunks)
         stream = client.models.generate_content_stream(
             model=GEMINI_MODEL,
             config=types.GenerateContentConfig(
@@ -263,5 +267,5 @@ def stream_gemini_response(messages: list, profile: dict):
         yield _friendly_gemini_error(exc)
 
 
-def get_gemini_response(messages: list, profile: dict) -> str:
-    return "".join(stream_gemini_response(messages, profile))
+def get_gemini_response(messages: list, profile: dict, rag_chunks: list[dict] | None = None) -> str:
+    return "".join(stream_gemini_response(messages, profile, rag_chunks=rag_chunks))

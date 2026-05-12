@@ -20,6 +20,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 RAG_INDEX_PATH = REPO_ROOT / "data" / "rag_index.json"
 RAG_EMBEDDINGS_PATH = REPO_ROOT / "data" / "rag_embeddings.json"
 DEFAULT_TOP_K = 5
+SOURCE_MIN_SCORE = 0.7
+MAX_SOURCE_COUNT = 4
 
 TOKEN_RE = re.compile(r"[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)?")
 STOP_WORDS = {
@@ -263,7 +265,7 @@ def format_rag_context(chunks: list[dict[str, Any]]) -> str:
     formatted_chunks: list[str] = []
     for index, chunk in enumerate(chunks, start=1):
         header = (
-            f"[RAG-{index}] {chunk.get('heading')} "
+            f"Context item {index}: {chunk.get('heading')} "
             f"({chunk.get('layer')} / {chunk.get('source')})"
         )
         lines = [header, str(chunk.get("text", "")).strip()]
@@ -283,3 +285,57 @@ def format_rag_context(chunks: list[dict[str, Any]]) -> str:
         formatted_chunks.append("\n".join(line for line in lines if line))
 
     return "\n\n".join(formatted_chunks)
+
+
+def collect_source_citations(
+    chunks: list[dict[str, Any]],
+    *,
+    min_score: float = SOURCE_MIN_SCORE,
+    max_sources: int = MAX_SOURCE_COUNT,
+) -> list[dict[str, str]]:
+    sources: list[dict[str, str]] = []
+    seen: set[str] = set()
+    seen_titles: set[str] = set()
+    preferred_source_files = {
+        str(chunk.get("source") or "")
+        for chunk in chunks[:3]
+        if chunk.get("layer") == "evidence" and float(chunk.get("score") or 0) >= min_score
+    }
+
+    for chunk in chunks:
+        if chunk.get("layer") != "evidence":
+            continue
+        if float(chunk.get("score") or 0) < min_score:
+            continue
+        if preferred_source_files and chunk.get("source") not in preferred_source_files:
+            continue
+
+        for citation in chunk.get("citations") or []:
+            title = str(citation.get("title") or "").strip()
+            url = str(citation.get("url") or "").strip()
+            if not title and not url:
+                continue
+
+            key = (url or title).casefold()
+            title_key = title.casefold()
+            if key in seen or title_key in seen_titles:
+                continue
+
+            seen.add(key)
+            if title_key:
+                seen_titles.add(title_key)
+            source = {
+                "title": title or "Untitled source",
+                "url": url,
+                "year": str(citation.get("year") or "").strip(),
+                "source_type": str(citation.get("source_type") or "").strip(),
+                "doi": str(citation.get("doi") or "").strip(),
+                "pmid": str(citation.get("pmid") or "").strip(),
+                "chunk_id": str(chunk.get("id") or "").strip(),
+                "heading": str(chunk.get("heading") or "").strip(),
+            }
+            sources.append({key: value for key, value in source.items() if value})
+            if len(sources) >= max_sources:
+                return sources
+
+    return sources

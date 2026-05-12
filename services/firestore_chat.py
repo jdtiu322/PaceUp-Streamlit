@@ -62,13 +62,35 @@ def create_chat_session(uid: str, first_message: str) -> str:
     return ref[1].id
 
 
-def save_message_to_firestore(uid: str, session_id: str, role: str, content: str) -> None:
+def _message_from_doc(doc) -> dict:
+    data = doc.to_dict() or {}
+    message = {
+        "role": data.get("role", ""),
+        "content": data.get("content", ""),
+    }
+    sources = data.get("sources")
+    if isinstance(sources, list) and sources:
+        message["sources"] = sources
+    return message
+
+
+def save_message_to_firestore(
+    uid: str,
+    session_id: str,
+    role: str,
+    content: str,
+    *,
+    sources: list[dict] | None = None,
+) -> None:
     now = datetime.now(timezone.utc)
     db = get_firestore_client()
     session_ref = db.collection("users").document(uid).collection("chat_sessions").document(session_id)
     message_ref = session_ref.collection("messages").document()
     batch = db.batch()
-    batch.set(message_ref, {"role": role, "content": content, "timestamp": now})
+    message_payload = {"role": role, "content": content, "timestamp": now}
+    if sources:
+        message_payload["sources"] = sources
+    batch.set(message_ref, message_payload)
     batch.update(
         session_ref,
         {
@@ -92,7 +114,7 @@ def load_messages_for_session(uid: str, session_id: str) -> list:
             .order_by("timestamp")
             .stream()
         )
-        return [{"role": msg.to_dict()["role"], "content": msg.to_dict()["content"]} for msg in msgs_ref]
+        return [_message_from_doc(msg) for msg in msgs_ref]
     except Exception:
         logger.exception("Failed to load all messages for session %s/%s.", uid, session_id)
         return []
@@ -116,7 +138,7 @@ def load_recent_messages_page(uid: str, session_id: str, page_size: int = MESSAG
         docs = docs[:page_size]
         docs.reverse()
 
-        messages = [{"role": doc.to_dict()["role"], "content": doc.to_dict()["content"]} for doc in docs]
+        messages = [_message_from_doc(doc) for doc in docs]
         cursor = docs[0].to_dict().get("timestamp").isoformat() if docs else None
         return messages, cursor, has_more
     except Exception:
@@ -149,7 +171,7 @@ def load_older_messages_page(
         docs = docs[:page_size]
         docs.reverse()
 
-        messages = [{"role": doc.to_dict()["role"], "content": doc.to_dict()["content"]} for doc in docs]
+        messages = [_message_from_doc(doc) for doc in docs]
         next_cursor = docs[0].to_dict().get("timestamp").isoformat() if docs else before_timestamp
         return messages, next_cursor, has_more
     except Exception:

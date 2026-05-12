@@ -5017,6 +5017,113 @@ body:has(.chat-page-bg) .stChatInputContainer + div .stChatMessage:last-child * 
     filter: none !important;
 }}
 
+/* Sources pill: citations are metadata, not inline assistant text. */
+body:has(.chat-page-bg) [class*="st-key-msg_sources_"] {{
+    width: fit-content !important;
+    max-width: min(52rem, 92%) !important;
+    margin: -.15rem 0 .55rem 2.7rem !important;
+}}
+body:has(.chat-page-bg) [class*="st-key-msg_sources_"] button {{
+    position: relative !important;
+    min-height: 2.2rem !important;
+    height: 2.2rem !important;
+    padding: 0 .9rem 0 3.75rem !important;
+    border-radius: 999px !important;
+    border: 1px solid rgba(255, 255, 255, .08) !important;
+    background: #303030 !important;
+    background-color: #303030 !important;
+    color: #ffffff !important;
+    font-size: .86rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    box-shadow: none !important;
+}}
+body:has(.chat-page-bg) [class*="st-key-msg_sources_"] button:hover {{
+    background: #3b3b3b !important;
+    background-color: #3b3b3b !important;
+    border-color: rgba(255, 255, 255, .16) !important;
+}}
+body:has(.chat-page-bg) [class*="st-key-msg_sources_"] button::before {{
+    content: "" !important;
+    position: absolute !important;
+    left: .72rem !important;
+    top: 50% !important;
+    width: 1.05rem !important;
+    height: 1.05rem !important;
+    border-radius: 999px !important;
+    transform: translateY(-50%) !important;
+    background: #ef4444 !important;
+    box-shadow:
+        .78rem 0 0 #635bff,
+        1.56rem 0 0 #c084fc !important;
+}}
+body:has(.chat-page-bg) [class*="st-key-msg_sources_"] button p,
+body:has(.chat-page-bg) [class*="st-key-msg_sources_"] button span {{
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    font-weight: 700 !important;
+}}
+.source-popover-panel {{
+    min-width: min(26rem, calc(100vw - 2rem));
+    max-width: min(30rem, calc(100vw - 2rem));
+    padding: .2rem 0 .1rem;
+}}
+.source-popover-title {{
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 800;
+    margin: 0 0 .75rem;
+}}
+.source-row {{
+    display: flex;
+    gap: .75rem;
+    padding: .75rem 0;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+}}
+.source-row:first-of-type {{
+    border-top: none;
+    padding-top: 0;
+}}
+.source-avatar {{
+    width: 1.35rem;
+    height: 1.35rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    color: #ffffff;
+    background: linear-gradient(135deg, #ef4444, #635bff);
+    font-size: .58rem;
+    font-weight: 900;
+}}
+.source-copy {{
+    min-width: 0;
+}}
+.source-title,
+.source-title a {{
+    color: #ffffff !important;
+    font-size: .9rem;
+    font-weight: 750;
+    line-height: 1.35;
+    text-decoration: none;
+}}
+.source-title a:hover {{
+    text-decoration: underline;
+}}
+.source-meta {{
+    color: #A0A0A0;
+    font-size: .78rem;
+    line-height: 1.35;
+    margin-top: .2rem;
+}}
+.source-heading {{
+    color: #c8d3e8;
+    font-size: .78rem;
+    line-height: 1.35;
+    margin-top: .22rem;
+}}
+
 </style>
 """, unsafe_allow_html=True)
 

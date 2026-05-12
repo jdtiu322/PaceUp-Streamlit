@@ -14,6 +14,7 @@ from services.firestore_chat import (
     save_message_to_firestore,
 )
 from services.gemini import stream_gemini_response
+from services.rag import collect_source_citations, retrieve_context
 from services.telemetry import log_event
 from state import logout_user
 
@@ -54,6 +55,13 @@ def _set_visible_messages(messages: list[dict], cursor: str | None, has_more: bo
 
 def _trim_model_context(messages: list[dict], limit: int = MODEL_CONTEXT_MESSAGE_LIMIT) -> list[dict]:
     return list(messages[-limit:])
+
+
+def _latest_user_message(messages: list[dict]) -> str:
+    return next(
+        (str(message.get("content") or "") for message in reversed(messages) if message.get("role") == "user"),
+        "",
+    )
 
 
 def _get_cached_chat_profile(user) -> dict:
@@ -156,14 +164,30 @@ def _render_streaming_assistant_response(user_uid: str, profile: dict) -> bool:
         return False
 
     messages = st.session_state.get("pending_assistant_messages") or list(st.session_state.messages)
-    reply = st.write_stream(stream_gemini_response(messages, profile))
+    rag_chunks = _retrieve_rag_chunks_for_message(_latest_user_message(messages))
+    sources = collect_source_citations(rag_chunks)
+    reply = st.write_stream(stream_gemini_response(messages, profile, rag_chunks=rag_chunks))
     if isinstance(reply, list):
         reply = "".join(str(part) for part in reply)
     reply = str(reply or "").strip()
+    sources = _sources_for_reply(reply, sources)
 
-    st.session_state.messages.append({"role": "assistant", "content": reply})
-    save_message_to_firestore(user_uid, sid, "assistant", reply)
-    log_event(user_uid, "gemini_response_completed", {"session_id": sid, "reply_length": len(reply)})
+    assistant_message = {"role": "assistant", "content": reply}
+    if sources:
+        assistant_message["sources"] = sources
+        _render_message_sources(sources, key="msg_sources_streaming")
+
+    st.session_state.messages.append(assistant_message)
+    save_message_to_firestore(user_uid, sid, "assistant", reply, sources=sources)
+    log_event(
+        user_uid,
+        "gemini_response_completed",
+        {
+            "session_id": sid,
+            "reply_length": len(reply),
+            "source_count": len(sources),
+        },
+    )
     st.session_state.pending_assistant_session_id = None
     st.session_state.pending_assistant_messages = []
     return True
@@ -174,6 +198,99 @@ def _format_message_content(content: str, *, role: str) -> str:
     if role == "user":
         return html.escape(text)
     return text
+
+
+def _retrieve_rag_chunks_for_message(user_message: str) -> list[dict]:
+    if not user_message:
+        return []
+
+    try:
+        return retrieve_context(user_message, top_k=5)
+    except Exception:
+        return []
+
+
+def _source_initials(source: dict) -> str:
+    title = str(source.get("title") or "Source")
+    skip_words = {"a", "an", "and", "for", "in", "of", "on", "the", "to", "with"}
+    words = [
+        word
+        for word in html.unescape(title).replace("-", " ").split()
+        if word and word.casefold() not in skip_words
+    ]
+    if not words:
+        return "S"
+    if len(words) == 1:
+        return words[0][:2].upper()
+    return "".join(word[0].upper() for word in words[:2])
+
+
+def _message_sources(message: dict) -> list[dict]:
+    sources = message.get("sources")
+    return sources if isinstance(sources, list) else []
+
+
+def _sources_for_reply(reply: str, sources: list[dict]) -> list[dict]:
+    if not sources:
+        return []
+
+    text = (reply or "").strip().casefold()
+    if not text:
+        return []
+
+    no_source_prefixes = (
+        "paceup hit the current gemini usage limit",
+        "sorry, paceup could not reach gemini",
+        "sorry, gemini_api_key is not configured",
+        "i can't help with requests to reveal or override",
+    )
+    if any(text.startswith(prefix) for prefix in no_source_prefixes):
+        return []
+
+    return sources
+
+
+def _render_message_sources(sources: list[dict], *, key: str) -> None:
+    if not sources:
+        return
+
+    with st.container(key=key):
+        with st.popover("Sources", key=f"{key}_popover", width="content"):
+            source_rows = []
+            for source in sources:
+                title = html.escape(str(source.get("title") or "Untitled source"))
+                url = html.escape(str(source.get("url") or ""), quote=True)
+                year = html.escape(str(source.get("year") or ""))
+                source_type = html.escape(str(source.get("source_type") or ""))
+                heading = html.escape(str(source.get("heading") or ""))
+                initials = html.escape(_source_initials(source))
+                title_html = (
+                    f'<a href="{url}" target="_blank" rel="noopener noreferrer">{title}</a>'
+                    if url
+                    else title
+                )
+                meta = " | ".join(part for part in (year, source_type) if part)
+                source_rows.append(
+                    f"""
+                    <div class="source-row">
+                        <div class="source-avatar">{initials}</div>
+                        <div class="source-copy">
+                            <div class="source-title">{title_html}</div>
+                            <div class="source-meta">{meta}</div>
+                            <div class="source-heading">{heading}</div>
+                        </div>
+                    </div>
+                    """
+                )
+            st.markdown(
+                f"""
+                <div class="source-popover-panel">
+                    <div class="source-popover-title">Sources used</div>
+                    {''.join(source_rows)}
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
 
 
 def _coerce_timestamp(value) -> datetime | None:
@@ -434,7 +551,9 @@ def show_chat() -> None:
                                     args=(user.uid, st.session_state.active_session_id),
                                 )
 
-                            for msg in _messages_for_display(st.session_state.messages, active_session_title):
+                            for message_index, msg in enumerate(
+                                _messages_for_display(st.session_state.messages, active_session_title)
+                            ):
                                 role = msg["role"]
                                 content = msg["content"]
                                 is_user = role == "user"
@@ -457,6 +576,10 @@ def show_chat() -> None:
 </div>
 </div>""",
                                         unsafe_allow_html=True,
+                                    )
+                                    _render_message_sources(
+                                        _message_sources(msg),
+                                        key=f"msg_sources_{message_index}",
                                     )
 
                             if st.session_state.get("pending_assistant_session_id") == st.session_state.active_session_id:
