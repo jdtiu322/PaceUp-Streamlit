@@ -27,7 +27,7 @@ def show_landing() -> None:
     st.markdown('<div class="landing-page-bg"></div>', unsafe_allow_html=True)
 
     with st.container(key="landing_nav"):
-        brand_col, links_col, actions_col = st.columns([1.35, 2.6, 1.35], gap="small")
+        brand_col, spacer_col, actions_col = st.columns([1.35, 2.85, 1.5], gap="small")
         with brand_col:
             st.markdown(
                 """
@@ -38,24 +38,15 @@ def show_landing() -> None:
                 """,
                 unsafe_allow_html=True,
             )
-        with links_col:
-            st.markdown(
-                """
-                <div class="landing-links">
-                    <span>Features</span>
-                    <span>Try the coach</span>
-                    <span>How it works</span>
-                    <span>Plans</span>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
+        with spacer_col:
+            st.markdown('<div class="landing-nav-spacer"></div>', unsafe_allow_html=True)
         with actions_col:
-            login_col, start_col = st.columns([.76, 1.24], gap="small")
-            with login_col:
-                _route_link("Log in", "login", "landing-route-link landing-login-link")
-            with start_col:
-                _route_link("Start training  →", "register", "landing-route-link landing-start-link")
+            with st.container(key="landing_nav_actions"):
+                login_col, start_col = st.columns([.76, 1.24], gap="small")
+                with login_col:
+                    _route_link("Log in", "login", "landing-route-link landing-login-link")
+                with start_col:
+                    _route_link("Start training  →", "register", "landing-route-link landing-start-link")
 
     with st.container(key="landing_hero"):
         copy_col, visual_col = st.columns([1.04, .96], gap="large")

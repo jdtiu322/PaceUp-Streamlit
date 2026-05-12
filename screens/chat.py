@@ -164,8 +164,9 @@ def _render_streaming_assistant_response(user_uid: str, profile: dict) -> bool:
         return False
 
     messages = st.session_state.get("pending_assistant_messages") or list(st.session_state.messages)
-    rag_chunks = _retrieve_rag_chunks_for_message(_latest_user_message(messages))
-    sources = collect_source_citations(rag_chunks)
+    latest_user_message = _latest_user_message(messages)
+    rag_chunks = _retrieve_rag_chunks_for_message(latest_user_message)
+    sources = collect_source_citations(rag_chunks, query=latest_user_message)
     reply = st.write_stream(stream_gemini_response(messages, profile, rag_chunks=rag_chunks))
     if isinstance(reply, list):
         reply = "".join(str(part) for part in reply)
@@ -271,26 +272,22 @@ def _render_message_sources(sources: list[dict], *, key: str) -> None:
                 )
                 meta = " | ".join(part for part in (year, source_type) if part)
                 source_rows.append(
-                    f"""
-                    <div class="source-row">
-                        <div class="source-avatar">{initials}</div>
-                        <div class="source-copy">
-                            <div class="source-title">{title_html}</div>
-                            <div class="source-meta">{meta}</div>
-                            <div class="source-heading">{heading}</div>
-                        </div>
-                    </div>
-                    """
+                    '<div class="source-row">'
+                    f'<div class="source-avatar">{initials}</div>'
+                    '<div class="source-copy">'
+                    f'<div class="source-title">{title_html}</div>'
+                    f'<div class="source-meta">{meta}</div>'
+                    f'<div class="source-heading">{heading}</div>'
+                    '</div>'
+                    '</div>'
                 )
-            st.markdown(
-                f"""
-                <div class="source-popover-panel">
-                    <div class="source-popover-title">Sources used</div>
-                    {''.join(source_rows)}
-                </div>
-                """,
-                unsafe_allow_html=True,
+            source_panel_html = (
+                '<div class="source-popover-panel">'
+                '<div class="source-popover-title">Sources used</div>'
+                f'{"".join(source_rows)}'
+                '</div>'
             )
+            st.markdown(source_panel_html, unsafe_allow_html=True)
 
 
 def _coerce_timestamp(value) -> datetime | None:

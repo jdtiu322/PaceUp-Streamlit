@@ -11,8 +11,8 @@
       "path": "data/evidence"
     }
   ],
-  "source_count": 11,
-  "chunk_count": 63,
+  "source_count": 21,
+  "chunk_count": 87,
   "sources": [
     {
       "layer": "knowledge",
@@ -46,9 +46,27 @@
     },
     {
       "layer": "evidence",
+      "source": "carb_loading.md",
+      "source_path": "data/evidence/carb_loading.md",
+      "chunk_count": 2
+    },
+    {
+      "layer": "evidence",
       "source": "fueling.md",
       "source_path": "data/evidence/fueling.md",
       "chunk_count": 4
+    },
+    {
+      "layer": "evidence",
+      "source": "gut_training.md",
+      "source_path": "data/evidence/gut_training.md",
+      "chunk_count": 2
+    },
+    {
+      "layer": "evidence",
+      "source": "heat_acclimation.md",
+      "source_path": "data/evidence/heat_acclimation.md",
+      "chunk_count": 3
     },
     {
       "layer": "evidence",
@@ -64,9 +82,51 @@
     },
     {
       "layer": "evidence",
+      "source": "iron_deficiency.md",
+      "source_path": "data/evidence/iron_deficiency.md",
+      "chunk_count": 3
+    },
+    {
+      "layer": "evidence",
+      "source": "marathon_specific_fueling.md",
+      "source_path": "data/evidence/marathon_specific_fueling.md",
+      "chunk_count": 3
+    },
+    {
+      "layer": "evidence",
+      "source": "overtraining_and_fatigue.md",
+      "source_path": "data/evidence/overtraining_and_fatigue.md",
+      "chunk_count": 2
+    },
+    {
+      "layer": "evidence",
       "source": "recovery_sleep.md",
       "source_path": "data/evidence/recovery_sleep.md",
       "chunk_count": 4
+    },
+    {
+      "layer": "evidence",
+      "source": "return_to_running.md",
+      "source_path": "data/evidence/return_to_running.md",
+      "chunk_count": 2
+    },
+    {
+      "layer": "evidence",
+      "source": "running_form_and_cadence.md",
+      "source_path": "data/evidence/running_form_and_cadence.md",
+      "chunk_count": 2
+    },
+    {
+      "layer": "evidence",
+      "source": "shoe_rotation_and_gear.md",
+      "source_path": "data/evidence/shoe_rotation_and_gear.md",
+      "chunk_count": 3
+    },
+    {
+      "layer": "evidence",
+      "source": "sleep_before_race.md",
+      "source_path": "data/evidence/sleep_before_race.md",
+      "chunk_count": 2
     },
     {
       "layer": "evidence",
@@ -512,6 +572,48 @@
       "citations": []
     },
     {
+      "id": "evidence-carb-loading-001",
+      "layer": "evidence",
+      "source": "carb_loading.md",
+      "source_path": "data/evidence/carb_loading.md",
+      "document_title": "Carbohydrate Loading Evidence",
+      "heading": "A high carbohydrate diet over several days can substantially increase muscle glycogen",
+      "text": "A high carbohydrate diet over several days can substantially increase muscle glycogen\n\nEvidence summary:\nSystematic review and meta-analytic evidence shows that glycogen supercompensation occurs after exhaustive exercise followed by several days of high carbohydrate intake. This supports carbohydrate loading as a real physiological strategy for long endurance events rather than a myth or purely psychological ritual.\n\nPractical PaceUp use:\nFor half-marathon and marathon athletes, PaceUp can explain that carb loading is mainly about topping off glycogen before long races. Keep the guidance practical: increase carbohydrate intake for several days before the event, reduce unnecessary training stress, and avoid extreme last-minute experimentation.",
+      "word_count": 104,
+      "citations": [
+        {
+          "title": "Glycogen supercompensation in skeletal muscle after cycling or running followed by a high carbohydrate intake the following days: a systematic review and meta-analysis",
+          "authors": "Kristian Solem, Matthieu Clauss, Jørgen Jensen",
+          "year": "2025",
+          "source_type": "Systematic review and meta-analysis",
+          "doi": "10.3389/fphys.2025.1620943",
+          "pmid": "40901614",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40901614/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-carb-loading-002",
+      "layer": "evidence",
+      "source": "carb_loading.md",
+      "source_path": "data/evidence/carb_loading.md",
+      "document_title": "Carbohydrate Loading Evidence",
+      "heading": "A simpler multi-day high carbohydrate strategy can work without an elaborate depletion protocol",
+      "text": "A simpler multi-day high carbohydrate strategy can work without an elaborate depletion protocol\n\nEvidence summary:\nExperimental evidence suggests that repeated glycogen supercompensation can occur with a four-day high carbohydrate feeding strategy after exhaustive exercise. This supports simpler modern loading approaches rather than older, more punitive depletion regimens.\n\nPractical PaceUp use:\nAvoid recommending a harsh depletion week. A cleaner message is usually better: reduce training, keep meals familiar, and increase carbohydrate intake enough to support glycogen storage without gastrointestinal chaos.",
+      "word_count": 81,
+      "citations": [
+        {
+          "title": "Repeated muscle glycogen supercompensation with four days' recovery between exhaustive exercise",
+          "authors": "Thomas M. Doering, Gregory R. Cox, José L. Areta, Vernon G. Coffey",
+          "year": "2019",
+          "source_type": "Experimental study",
+          "doi": "10.1016/j.jsams.2019.03.009",
+          "pmid": "30940441",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30940441/"
+        }
+      ]
+    },
+    {
       "id": "evidence-fueling-001",
       "layer": "evidence",
       "source": "fueling.md",
@@ -588,6 +690,111 @@
           "source_type": "Position stand",
           "doi": "10.1186/s12970-017-0189-4",
           "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5596471/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-gut-training-001",
+      "layer": "evidence",
+      "source": "gut_training.md",
+      "source_path": "data/evidence/gut_training.md",
+      "document_title": "Gut Training Evidence",
+      "heading": "Repeated feeding exposure can improve gastrointestinal tolerance during endurance exercise",
+      "text": "Repeated feeding exposure can improve gastrointestinal tolerance during endurance exercise\n\nEvidence summary:\nSystematic review evidence suggests that repeated exposure to carbohydrate feeding before and during endurance exercise can improve markers of gastrointestinal tolerance and may reduce some exercise-associated gut symptoms in trained athletes.\n\nPractical PaceUp use:\nWhen runners struggle with gels or sports drink, avoid telling them they simply \"cannot fuel.\" Instead, frame tolerance as trainable and recommend practicing small, repeatable doses during long runs and race-specific sessions.",
+      "word_count": 80,
+      "citations": [
+        {
+          "title": "The Effect of Gut-Training and Feeding-Challenge on Markers of Gastrointestinal Status in Response to Endurance Exercise: A Systematic Literature Review",
+          "authors": "Isabel G. Martinez, Alice S. Mika, Jessica R. Biesiekierski, Ricardo J. S. Costa",
+          "year": "2023",
+          "source_type": "Systematic literature review",
+          "doi": "10.1007/s40279-023-01841-0",
+          "pmid": "37061651",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37061651/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-gut-training-002",
+      "layer": "evidence",
+      "source": "gut_training.md",
+      "source_path": "data/evidence/gut_training.md",
+      "document_title": "Gut Training Evidence",
+      "heading": "High carbohydrate race practice may help tolerance more than performance in the short term",
+      "text": "High carbohydrate race practice may help tolerance more than performance in the short term\n\nEvidence summary:\nA short-term intervention in highly trained endurance athletes found that very high carbohydrate intake and gut-training had modest effects on gastrointestinal status and only minor effects on performance over the study period. This supports using gut training primarily to improve tolerance and execution rather than promising dramatic speed gains by itself.\n\nPractical PaceUp use:\nTell runners to separate two goals: learning to tolerate race fueling and trying to improve performance. Early gut training should prioritize consistency, comfort, and finishing long runs without stomach blowups.",
+      "word_count": 102,
+      "citations": [
+        {
+          "title": "Short-Term Very High Carbohydrate Diet and Gut-Training Have Minor Effects on Gastrointestinal Status and Performance in Highly Trained Endurance Athletes",
+          "authors": "Andy J. King, Naroa Etxebarria, Megan L. Ross, Laura Garvican-Lewis, Louise M. Burke, and colleagues",
+          "year": "2022",
+          "source_type": "Clinical trial",
+          "doi": "10.3390/nu14091929",
+          "pmid": "35565896",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35565896/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-heat-acclimation-001",
+      "layer": "evidence",
+      "source": "heat_acclimation.md",
+      "source_path": "data/evidence/heat_acclimation.md",
+      "document_title": "Heat Acclimation Evidence",
+      "heading": "Heat acclimation improves tolerance to hot racing conditions",
+      "text": "Heat acclimation improves tolerance to hot racing conditions\n\nEvidence summary:\nSystematic review and meta-analytic evidence supports that repeated heat acclimation produces meaningful thermoregulatory adaptations and that some benefits can be retained and regained with re-induction. For endurance athletes, the practical outcome is usually lower physiological strain and better tolerance when training or racing in hot conditions.\n\nPractical PaceUp use:\nIf a runner has a goal race in hot or humid weather, advise a structured acclimation block rather than relying on race-week guesswork. Emphasize several repeated exposures, gradual progression, and an effort-based adjustment during the adaptation period.",
+      "word_count": 100,
+      "citations": [
+        {
+          "title": "Heat Acclimation Decay and Re-Induction: A Systematic Review and Meta-Analysis",
+          "authors": "Hein A. M. D. Daanen, Sebastien Racinais, Julien D. Périard",
+          "year": "2018",
+          "source_type": "Systematic review and meta-analysis",
+          "doi": "10.1007/s40279-017-0808-x",
+          "pmid": "29129022",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29129022/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-heat-acclimation-002",
+      "layer": "evidence",
+      "source": "heat_acclimation.md",
+      "source_path": "data/evidence/heat_acclimation.md",
+      "document_title": "Heat Acclimation Evidence",
+      "heading": "Passive heat strategies can be a practical alternative when full heat camps are unrealistic",
+      "text": "Passive heat strategies can be a practical alternative when full heat camps are unrealistic\n\nEvidence summary:\nReview evidence on passive heating strategies suggests that post-exercise hot water immersion, sauna use, and other passive exposures may provide useful heat acclimation support when formal training in hot environments is difficult to schedule.\n\nPractical PaceUp use:\nFor runners who cannot safely or consistently train in the heat, suggest passive heat exposure only if they already tolerate training well and can recover appropriately. Keep the message practical: passive strategies support acclimation, but they do not replace sensible pacing, hydration, and symptom awareness.",
+      "word_count": 99,
+      "citations": [
+        {
+          "title": "Passive Heating: Reviewing Practical Heat Acclimation Strategies for Endurance Athletes",
+          "authors": "Storme L. Heathcote, Peter Hassmén, Shi Zhou, Christopher J. Stevens",
+          "year": "2018",
+          "source_type": "Review",
+          "doi": "10.3389/fphys.2018.01851",
+          "pmid": "30618849",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30618849/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-heat-acclimation-003",
+      "layer": "evidence",
+      "source": "heat_acclimation.md",
+      "source_path": "data/evidence/heat_acclimation.md",
+      "document_title": "Heat Acclimation Evidence",
+      "heading": "Cooling can help race-day performance, but it is not a substitute for acclimation",
+      "text": "Cooling can help race-day performance, but it is not a substitute for acclimation\n\nEvidence summary:\nSystematic review evidence indicates that pre-cooling can improve endurance exercise performance in the heat, likely by lowering thermal strain before exercise begins. However, cooling is a race-day aid rather than a full replacement for acclimation.\n\nPractical PaceUp use:\nFor hot events, PaceUp can suggest simple cooling tactics such as shade, cold fluids, or cooling garments before the start, while still prioritizing acclimation and conservative pacing.",
+      "word_count": 83,
+      "citations": [
+        {
+          "title": "Pre-cooling for endurance exercise performance in the heat: a systematic review",
+          "authors": "Paul R. Jones, Christian Barton, Dylan Morrissey, Nicola Maffulli, Stephanie Hemmings",
+          "year": "2012",
+          "source_type": "Systematic review",
+          "doi": "10.1186/1741-7015-10-166",
+          "pmid": "23249542",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23249542/"
         }
       ]
     },
@@ -772,6 +979,174 @@
       ]
     },
     {
+      "id": "evidence-iron-deficiency-001",
+      "layer": "evidence",
+      "source": "iron_deficiency.md",
+      "source_path": "data/evidence/iron_deficiency.md",
+      "document_title": "Iron Deficiency Evidence",
+      "heading": "Female endurance athletes can have a high prevalence of low iron stores",
+      "text": "Female endurance athletes can have a high prevalence of low iron stores\n\nEvidence summary:\nRecent observational evidence in highly trained female endurance athletes found a high prevalence of sub-optimal iron status. This supports iron screening as a real practical issue in endurance sport rather than a niche concern.\n\nPractical PaceUp use:\nIf a runner reports unexplained fatigue, poor recovery, heavy menstrual losses, or a history of low ferritin, PaceUp should normalize screening rather than guessing. Advice should point runners toward testing, not immediate supplementing without context.",
+      "word_count": 87,
+      "citations": [
+        {
+          "title": "High Prevalence of Iron Deficiency Exhibited in Internationally Competitive, Non-Professional Female Endurance Athletes-A Case Study",
+          "authors": "Stacy T. Sims, Kelsi Mackay, Alana Leabeater, Anthea Clarke, Katherine Schofield, Matthew Driller",
+          "year": "2022",
+          "source_type": "Observational case study",
+          "doi": "10.3390/ijerph192416606",
+          "pmid": "36554486",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36554486/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-iron-deficiency-002",
+      "layer": "evidence",
+      "source": "iron_deficiency.md",
+      "source_path": "data/evidence/iron_deficiency.md",
+      "document_title": "Iron Deficiency Evidence",
+      "heading": "Low energy availability can worsen iron-related stress in endurance runners",
+      "text": "Low energy availability can worsen iron-related stress in endurance runners\n\nEvidence summary:\nExperimental evidence in male long-distance runners found that short-term low energy availability during endurance training altered iron metabolism. This supports the idea that fueling problems and iron issues can overlap.\n\nPractical PaceUp use:\nWhen fatigue and low iron concerns appear together, PaceUp should consider whether the runner is simply under-fueling overall. This is especially relevant during high-volume training, weight-loss attempts, or restrictive eating patterns.",
+      "word_count": 82,
+      "citations": [
+        {
+          "title": "Effect of low energy availability during three consecutive days of endurance training on iron metabolism in male long distance runners",
+          "authors": "Aya Ishibashi, Chihiro Kojima, Yoko Tanabe, Kaito Iwayama, Kazushige Goto, Hideyuki Takahashi, and colleagues",
+          "year": "2020",
+          "source_type": "Experimental study",
+          "doi": "10.14814/phy2.14494",
+          "pmid": "32597030",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32597030/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-iron-deficiency-003",
+      "layer": "evidence",
+      "source": "iron_deficiency.md",
+      "source_path": "data/evidence/iron_deficiency.md",
+      "document_title": "Iron Deficiency Evidence",
+      "heading": "Iron supplementation decisions should be based on testing and context",
+      "text": "Iron supplementation decisions should be based on testing and context\n\nEvidence summary:\nReview guidance on iron supplementation in athletes emphasizes that endurance athletes can be at increased risk of deficiency, but supplementation decisions still require interpretation of iron status rather than blanket treatment.\n\nPractical PaceUp use:\nPaceUp should not prescribe iron doses. The safer coaching role is to flag risk patterns, encourage appropriate blood work, and remind runners that both deficiency and unnecessary supplementation carry downsides.",
+      "word_count": 76,
+      "citations": [
+        {
+          "title": "Iron supplementation in athletes. Current recommendations",
+          "authors": "P. Nielsen, D. Nachtigall",
+          "year": "1998",
+          "source_type": "Review",
+          "doi": "10.2165/00007256-199826040-00001",
+          "pmid": "9820921",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/9820921/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-marathon-specific-fueling-001",
+      "layer": "evidence",
+      "source": "marathon_specific_fueling.md",
+      "source_path": "data/evidence/marathon_specific_fueling.md",
+      "document_title": "Marathon Specific Fueling Evidence",
+      "heading": "Marathon fueling usually requires carbohydrate during the race, not just before it",
+      "text": "Marathon fueling usually requires carbohydrate during the race, not just before it\n\nEvidence summary:\nReview evidence focused on endurance running supports carbohydrate ingestion during prolonged running events as a meaningful performance aid. Marathon runners should not rely only on breakfast or carb loading if they expect to be on course for a substantial duration.\n\nPractical PaceUp use:\nFor marathon advice, PaceUp should treat during-race fueling as part of pacing strategy, not an optional extra. Encourage runners to practice a schedule in long runs and adjust it for pace, weather, and stomach tolerance.",
+      "word_count": 93,
+      "citations": [
+        {
+          "title": "Does Carbohydrate Intake During Endurance Running Improve Performance? A Critical Review",
+          "authors": "Patrick B. Wilson",
+          "year": "2016",
+          "source_type": "Critical review",
+          "doi": "10.1519/JSC.0000000000001430",
+          "pmid": "27045602",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27045602/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-marathon-specific-fueling-002",
+      "layer": "evidence",
+      "source": "marathon_specific_fueling.md",
+      "source_path": "data/evidence/marathon_specific_fueling.md",
+      "document_title": "Marathon Specific Fueling Evidence",
+      "heading": "Very long events can benefit from higher carbohydrate delivery using multiple transportable carbohydrates",
+      "text": "Very long events can benefit from higher carbohydrate delivery using multiple transportable carbohydrates\n\nEvidence summary:\nReview guidance indicates that endurance athletes competing beyond roughly 2.5 hours can oxidize higher carbohydrate amounts when glucose or maltodextrin is combined with fructose. This is one reason marathon and ultra fueling plans often differ from shorter-race guidance.\n\nPractical PaceUp use:\nFor slower marathoners or highly competitive runners aiming to fuel aggressively, suggest testing higher carbohydrate rates with mixed carbohydrate sources. Keep the emphasis on practice and gut tolerance rather than forcing a number on race day.",
+      "word_count": 94,
+      "citations": [
+        {
+          "title": "The use of carbohydrates during exercise as an ergogenic aid",
+          "authors": "Asker E. Jeukendrup",
+          "year": "2013",
+          "source_type": "Review",
+          "doi": "10.1007/s40279-013-0079-0",
+          "pmid": "23846824",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23846824/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-marathon-specific-fueling-003",
+      "layer": "evidence",
+      "source": "marathon_specific_fueling.md",
+      "source_path": "data/evidence/marathon_specific_fueling.md",
+      "document_title": "Marathon Specific Fueling Evidence",
+      "heading": "Multiple transportable carbohydrate blends can outperform glucose-only strategies at high intake rates",
+      "text": "Multiple transportable carbohydrate blends can outperform glucose-only strategies at high intake rates\n\nEvidence summary:\nControlled performance evidence suggests that mixed glucose plus fructose formulations can support better long-distance endurance performance than glucose-only strategies when intake rates are high.\n\nPractical PaceUp use:\nWhen helping a runner choose gels or drinks for a marathon, PaceUp can explain why product formulation matters. This supports planning with specific brands or mixes in training rather than selecting gels randomly at the expo.",
+      "word_count": 80,
+      "citations": [
+        {
+          "title": "Superior endurance performance with ingestion of multiple transportable carbohydrates",
+          "authors": "Kevin Currell, Asker E. Jeukendrup",
+          "year": "2008",
+          "source_type": "Controlled performance study",
+          "doi": "10.1249/mss.0b013e31815adf19",
+          "pmid": "18202575",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18202575/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-overtraining-and-fatigue-001",
+      "layer": "evidence",
+      "source": "overtraining_and_fatigue.md",
+      "source_path": "data/evidence/overtraining_and_fatigue.md",
+      "document_title": "Overtraining And Fatigue Evidence",
+      "heading": "Overtraining syndrome is more than feeling tired after a hard week",
+      "text": "Overtraining syndrome is more than feeling tired after a hard week\n\nEvidence summary:\nSystematic review evidence indicates that overtraining syndrome is associated with a broad mix of physiological and psychological symptoms, but there is still no single definitive diagnostic marker. Long-term underperformance and recovery failure are more important than ordinary post-workout fatigue.\n\nPractical PaceUp use:\nDo not label every tired runner as overtrained. Ask about duration of underperformance, mood, sleep, illness, appetite, training monotony, and whether rest actually improves symptoms.",
+      "word_count": 82,
+      "citations": [
+        {
+          "title": "Overtraining Syndrome Symptoms and Diagnosis in Athletes: Where Is the Research? A Systematic Review",
+          "authors": "Jonathon Weakley, Shona L. Halson, Iñigo Mujika",
+          "year": "2022",
+          "source_type": "Systematic review",
+          "doi": "10.1123/ijspp.2021-0448",
+          "pmid": "35320774",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35320774/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-overtraining-and-fatigue-002",
+      "layer": "evidence",
+      "source": "overtraining_and_fatigue.md",
+      "source_path": "data/evidence/overtraining_and_fatigue.md",
+      "document_title": "Overtraining And Fatigue Evidence",
+      "heading": "Management usually starts with load reduction and recovery, not heroics",
+      "text": "Management usually starts with load reduction and recovery, not heroics\n\nEvidence summary:\nPractical review guidance on overtraining syndrome emphasizes that evaluation and management require looking at total stress load, excluding medical causes, and restoring recovery. Treatment commonly centers on reducing training load, improving recovery behaviors, and monitoring the athlete over time.\n\nPractical PaceUp use:\nWhen a runner sounds deeply fatigued or chronically flat, PaceUp should bias toward backing off and simplifying. Recommend recovery, basic medical follow-up when red flags exist, and a gradual rebuild once symptoms genuinely improve.",
+      "word_count": 89,
+      "citations": [
+        {
+          "title": "Overtraining syndrome: a practical guide",
+          "authors": "Jeffrey B. Kreher, Jennifer B. Schwartz",
+          "year": "2012",
+          "source_type": "Practical review",
+          "doi": "10.1177/1941738111434406",
+          "pmid": "23016079",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23016079/"
+        }
+      ]
+    },
+    {
       "id": "evidence-recovery-sleep-001",
       "layer": "evidence",
       "source": "recovery_sleep.md",
@@ -849,6 +1224,195 @@
           "doi": "10.1186/s40798-023-00599-z",
           "pmid": "37462808",
           "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10354314/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-return-to-running-001",
+      "layer": "evidence",
+      "source": "return_to_running.md",
+      "source_path": "data/evidence/return_to_running.md",
+      "document_title": "Return To Running Evidence",
+      "heading": "Return timelines after bone stress injuries depend heavily on injury site and severity",
+      "text": "Return timelines after bone stress injuries depend heavily on injury site and severity\n\nEvidence summary:\nSystematic review and meta-analytic evidence shows that return-to-sport timelines after bone stress injuries vary substantially by anatomical site, with high-risk locations taking longer and carrying greater complication risk than lower-risk sites.\n\nPractical PaceUp use:\nIf a runner is returning from a suspected or confirmed bone stress injury, avoid generic timelines. Encourage clinician-guided clearance for high-risk sites and use very conservative expectations for return when pain history or imaging suggests a more serious lesion.",
+      "word_count": 95,
+      "citations": [
+        {
+          "title": "Return to sport following low-risk and high-risk bone stress injuries: a systematic review and meta-analysis",
+          "authors": "Tim Hoenig, Julian Eissele, André Strahl, Kristin L. Popp, Adam S. Tenforde, and colleagues",
+          "year": "2023",
+          "source_type": "Systematic review and meta-analysis",
+          "doi": "10.1136/bjsports-2022-106328",
+          "pmid": "36720584",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36720584/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-return-to-running-002",
+      "layer": "evidence",
+      "source": "return_to_running.md",
+      "source_path": "data/evidence/return_to_running.md",
+      "document_title": "Return To Running Evidence",
+      "heading": "Imaging grade can help explain why some runners need a slower comeback",
+      "text": "Imaging grade can help explain why some runners need a slower comeback\n\nEvidence summary:\nMeta-analytic evidence indicates that higher MRI grading in bone stress injuries is associated with longer return-to-sport timelines. This supports individualized rehabilitation decisions rather than assuming every runner can resume on the same schedule.\n\nPractical PaceUp use:\nWhen a runner asks for a comeback plan after a stress reaction or stress fracture, frame the answer around symptom response and medical context. If MRI grade or injury site is known, use that to justify caution instead of forcing a rigid calendar.",
+      "word_count": 96,
+      "citations": [
+        {
+          "title": "Does Magnetic Resonance Imaging Grading Correlate With Return to Sports After Bone Stress Injuries? A Systematic Review and Meta-analysis",
+          "authors": "Tim Hoenig, Adam S. Tenforde, André Strahl, Tim Rolvien, Karsten Hollander",
+          "year": "2022",
+          "source_type": "Systematic review and meta-analysis",
+          "doi": "10.1177/0363546521993807",
+          "pmid": "33720786",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33720786/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-running-form-and-cadence-001",
+      "layer": "evidence",
+      "source": "running_form_and_cadence.md",
+      "source_path": "data/evidence/running_form_and_cadence.md",
+      "document_title": "Running Form And Cadence Evidence",
+      "heading": "Small cadence increases can reduce lower-limb loading",
+      "text": "Small cadence increases can reduce lower-limb loading\n\nEvidence summary:\nBiomechanical evidence shows that modest step-rate increases, often around 5 to 10 percent above preferred cadence, can reduce loading at the knee and hip during running. This does not mean every runner needs the same cadence target, but it supports cadence as a practical lever in some injury-related cases.\n\nPractical PaceUp use:\nAvoid telling runners there is one ideal cadence for everyone. Use cadence changes as a tool when the goal is to reduce overstriding or lower loading, and keep changes small enough to feel sustainable.",
+      "word_count": 98,
+      "citations": [
+        {
+          "title": "Effects of step rate manipulation on joint mechanics during running",
+          "authors": "Bryan C. Heiderscheit, Elizabeth S. Chumanov, Max P. Michalski, Christa M. Wille, Michael B. Ryan",
+          "year": "2011",
+          "source_type": "Biomechanics study",
+          "doi": "10.1249/MSS.0b013e3181ebedf4",
+          "pmid": "20581720",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/20581720/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-running-form-and-cadence-002",
+      "layer": "evidence",
+      "source": "running_form_and_cadence.md",
+      "source_path": "data/evidence/running_form_and_cadence.md",
+      "document_title": "Running Form And Cadence Evidence",
+      "heading": "Gait retraining can change mechanics, but performance gains are not guaranteed",
+      "text": "Gait retraining can change mechanics, but performance gains are not guaranteed\n\nEvidence summary:\nSystematic review and meta-analytic evidence suggests gait retraining can change running kinematics and kinetics, and step-rate interventions can reduce some loading variables. However, evidence for improved running economy or outright performance enhancement is less consistent.\n\nPractical PaceUp use:\nDo not oversell form tweaks as speed hacks. Position gait retraining as a targeted intervention for specific problems such as pain, loading, or overstriding, and keep the runner's main training goals in view.",
+      "word_count": 87,
+      "citations": [
+        {
+          "title": "The Effectiveness of Gait Retraining on Running Kinematics, Kinetics, Performance, Pain, and Injury in Distance Runners: A Systematic Review With Meta-analysis",
+          "authors": "Eoin Doyle, Tim L. A. Doyle, Jason Bonacci, Joel T. Fuller",
+          "year": "2022",
+          "source_type": "Systematic review and meta-analysis",
+          "doi": "10.2519/jospt.2022.10585",
+          "pmid": "35128941",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35128941/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-shoe-rotation-and-gear-001",
+      "layer": "evidence",
+      "source": "shoe_rotation_and_gear.md",
+      "source_path": "data/evidence/shoe_rotation_and_gear.md",
+      "document_title": "Shoe Rotation And Gear Evidence",
+      "heading": "Footwear comfort is a meaningful performance consideration",
+      "text": "Footwear comfort is a meaningful performance consideration\n\nEvidence summary:\nSystematic review and meta-analytic evidence suggests that more comfortable footwear is associated with improved running economy. This supports a practical, runner-centered approach to shoe choice rather than assuming that every performance claim comes from stiffness, plate shape, or branding alone.\n\nPractical PaceUp use:\nWhen a runner asks which shoe to race or train in, give comfort and confidence real weight. If two options are both appropriate, the more comfortable and familiar option is often the better recommendation.",
+      "word_count": 88,
+      "citations": [
+        {
+          "title": "Increased footwear comfort is associated with improved running economy - a systematic review and meta-analysis",
+          "authors": "K. Van Alsenoy, M. L. van der Linden, O. Girard, D. Santos",
+          "year": "2023",
+          "source_type": "Systematic review and meta-analysis",
+          "doi": "10.1080/17461391.2021.1998642",
+          "pmid": "34726119",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34726119/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-shoe-rotation-and-gear-002",
+      "layer": "evidence",
+      "source": "shoe_rotation_and_gear.md",
+      "source_path": "data/evidence/shoe_rotation_and_gear.md",
+      "document_title": "Shoe Rotation And Gear Evidence",
+      "heading": "Shoe features may affect injury risk in some runners, but not uniformly",
+      "text": "Shoe features may affect injury risk in some runners, but not uniformly\n\nEvidence summary:\nA randomized controlled trial found lower overall injury risk in runners assigned motion control shoes, with the clearest benefit appearing in runners with pronated feet. This supports more individualized footwear thinking rather than one universal shoe rule.\n\nPractical PaceUp use:\nDo not promise that one shoe category prevents injury for everyone. Use footwear suggestions as a personalized experiment, especially when a runner has a clear movement pattern, comfort preference, or injury history.",
+      "word_count": 86,
+      "citations": [
+        {
+          "title": "Injury risk in runners using standard or motion control shoes: a randomised controlled trial with participant and assessor blinding",
+          "authors": "Laurent Malisoux, Nicolas Chambon, Nicolas Delattre, Nils Gueguen, Axel Urhausen, Daniel Theisen",
+          "year": "2016",
+          "source_type": "Randomized controlled trial",
+          "doi": "10.1136/bjsports-2015-095031",
+          "pmid": "26746907",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/26746907/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-shoe-rotation-and-gear-003",
+      "layer": "evidence",
+      "source": "shoe_rotation_and_gear.md",
+      "source_path": "data/evidence/shoe_rotation_and_gear.md",
+      "document_title": "Shoe Rotation And Gear Evidence",
+      "heading": "Advanced race shoes can improve economy, but they still need testing in training",
+      "text": "Advanced race shoes can improve economy, but they still need testing in training\n\nEvidence summary:\nControlled evidence indicates that carbon plate shoes can improve metabolic cost and performance measures in recreational runners, but changes in footwear geometry and stiffness can also alter tissue loading and tolerance.\n\nPractical PaceUp use:\nPaceUp should not recommend a brand-new race shoe on race day. Even if a shoe is potentially faster, runners should test it in training first to check comfort, calf and foot response, and fueling logistics.",
+      "word_count": 85,
+      "citations": [
+        {
+          "title": "Carbon Plate Shoes Improve Metabolic Power and Performance in Recreational Runners",
+          "authors": "Anders Nielsen, Jesper Franch, Christian Heyde, Mark de Zee, Uwe Kersting, Ryan Godsk Larsen",
+          "year": "2022",
+          "source_type": "Randomized cross-over study",
+          "doi": "10.1055/a-1776-7986",
+          "pmid": "35523201",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35523201/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-sleep-before-race-001",
+      "layer": "evidence",
+      "source": "sleep_before_race.md",
+      "source_path": "data/evidence/sleep_before_race.md",
+      "document_title": "Sleep Before Race Evidence",
+      "heading": "Poor sleep before competition is common, especially in higher-stakes settings",
+      "text": "Poor sleep before competition is common, especially in higher-stakes settings\n\nEvidence summary:\nObservational evidence suggests that many athletes report poor sleep quality before competition, with higher-risk groups including individual-sport and higher-level competitors. This means pre-race sleep problems are common enough that they should be normalized rather than treated as instant failure.\n\nPractical PaceUp use:\nIf a runner is anxious because they slept badly the night before a race, avoid catastrophic language. Reinforce that nerves and imperfect sleep are common, and focus them on pacing, fueling, and staying calm instead of chasing perfection at the last minute.",
+      "word_count": 101,
+      "citations": [
+        {
+          "title": "Prevalence of poor sleep quality in athletes before competition",
+          "authors": "Alexandro Andrade, Guilherme Guimarães Bevilacqua, Pedro De Orleans Casagrande, Ricardo Brandt, Danilo Coimbra",
+          "year": "2021",
+          "source_type": "Observational study",
+          "doi": "10.1080/00913847.2020.1784688",
+          "pmid": "32571135",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32571135/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-sleep-before-race-002",
+      "layer": "evidence",
+      "source": "sleep_before_race.md",
+      "source_path": "data/evidence/sleep_before_race.md",
+      "document_title": "Sleep Before Race Evidence",
+      "heading": "Improving sleep across the training week is more reliable than panicking about one night",
+      "text": "Improving sleep across the training week is more reliable than panicking about one night\n\nEvidence summary:\nSystematic review evidence on sleep extension in athletes suggests that increasing sleep opportunity can support sports performance. The practical implication is that cumulative sleep habits often matter more than a desperate single-night fix.\n\nPractical PaceUp use:\nPaceUp should encourage runners to protect sleep in the days leading into key races rather than obsess over one pre-race night. Recommend familiar routines, earlier wind-down, and reduced late-night stimulation during race week.",
+      "word_count": 89,
+      "citations": [
+        {
+          "title": "Sleep extension in athletes: what we know so far - A systematic review",
+          "authors": "Aldo Coelho Silva, Andressa Silva, Ben J. Edwards, David Tod, Marco Túlio de Mello, and colleagues",
+          "year": "2021",
+          "source_type": "Systematic review",
+          "doi": "10.1016/j.sleep.2020.11.028",
+          "pmid": "33352457",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33352457/"
         }
       ]
     },

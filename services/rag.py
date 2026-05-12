@@ -20,10 +20,60 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 RAG_INDEX_PATH = REPO_ROOT / "data" / "rag_index.json"
 RAG_EMBEDDINGS_PATH = REPO_ROOT / "data" / "rag_embeddings.json"
 DEFAULT_TOP_K = 5
-SOURCE_MIN_SCORE = 0.7
+EMBEDDING_SOURCE_MIN_SCORE = 0.7
+LEXICAL_SOURCE_MIN_SCORE = 0.15
 MAX_SOURCE_COUNT = 4
 
 TOKEN_RE = re.compile(r"[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)?")
+TOKEN_NORMALIZATION_PREFIXES: tuple[tuple[str, str], ...] = (
+    ("acclim", "acclimate"),
+    ("cadence", "cadence"),
+    ("carb", "carb"),
+    ("hydrat", "hydrate"),
+    ("humid", "humid"),
+    ("drink", "drink"),
+    ("fuel", "fuel"),
+    ("footwear", "shoe"),
+    ("gear", "gear"),
+    ("gastro", "gut"),
+    ("gut", "gut"),
+    ("iron", "iron"),
+    ("ferrit", "ferritin"),
+    ("marathon", "marathon"),
+    ("overtrain", "overtrain"),
+    ("fatigu", "fatigue"),
+    ("shoe", "shoe"),
+    ("sleep", "sleep"),
+    ("recover", "recover"),
+    ("return", "return"),
+    ("taper", "taper"),
+    ("strength", "strength"),
+    ("stomach", "gut"),
+    ("stride", "stride"),
+    ("gait", "gait"),
+    ("form", "form"),
+    ("runner", "run"),
+    ("running", "run"),
+    ("runs", "run"),
+)
+EVIDENCE_TOPIC_SOURCE_HINTS: dict[str, set[str]] = {
+    "carb_loading.md": {"carb", "carbohydrate", "glycogen", "load", "loading", "marathon", "race"},
+    "hydration.md": {"dehydrate", "drink", "fluid", "heat", "humid", "hydrate", "hydration", "sodium", "sweat"},
+    "fueling.md": {"carb", "carbohydrate", "eat", "fuel", "gel", "nutrition"},
+    "gut_training.md": {"carb", "fuel", "gel", "gastro", "gut", "nausea", "stomach"},
+    "heat_acclimation.md": {"acclimate", "cooling", "heat", "hot", "humid", "humidity", "sauna"},
+    "iron_deficiency.md": {"anemia", "ferritin", "hemoglobin", "iron"},
+    "injury_prevention.md": {"injury", "pain", "prevent", "prevention"},
+    "marathon_specific_fueling.md": {"carb", "carbohydrate", "fuel", "fueling", "gel", "marathon", "race"},
+    "overtraining_and_fatigue.md": {"burnout", "fatigue", "overtrain", "recovery", "tired", "underperform"},
+    "recovery_sleep.md": {"fatigue", "recover", "recovery", "sleep"},
+    "return_to_running.md": {"comeback", "injury", "restart", "return", "resume", "run"},
+    "running_form_and_cadence.md": {"cadence", "footstrike", "form", "gait", "mechanics", "stride"},
+    "shoe_rotation_and_gear.md": {"carbon", "footwear", "gear", "rotation", "shoe"},
+    "sleep_before_race.md": {"competition", "insomnia", "night", "race", "sleep"},
+    "strength_training.md": {"gym", "lift", "plyometric", "resistance", "strength"},
+    "tapering.md": {"taper", "tapering"},
+}
 STOP_WORDS = {
     "a",
     "about",
@@ -105,8 +155,19 @@ def _chunks_from_index() -> list[dict[str, Any]]:
     return load_rag_index().get("chunks", [])
 
 
+def _embedding_index_is_stale(index_chunks: list[dict[str, Any]], embedded_chunks: list[dict[str, Any]]) -> bool:
+    return bool(index_chunks and embedded_chunks and len(embedded_chunks) < len(index_chunks))
+
+
 def _tokenize(text: str) -> list[str]:
-    tokens = [token.casefold() for token in TOKEN_RE.findall(text or "")]
+    tokens = []
+    for raw_token in TOKEN_RE.findall(text or ""):
+        token = raw_token.casefold()
+        for prefix, normalized in TOKEN_NORMALIZATION_PREFIXES:
+            if token.startswith(prefix):
+                token = normalized
+                break
+        tokens.append(token)
     return [token for token in tokens if token not in STOP_WORDS and len(token) > 1]
 
 
@@ -216,40 +277,49 @@ def retrieve_context(
     if not query or top_k <= 0:
         return []
 
+    index_chunks = _chunks_from_index()
     if prefer_embeddings:
         embedded_chunks = [
             chunk for chunk in _chunks_from_embeddings() if chunk.get("embedding")
         ]
         if embedded_chunks:
-            try:
-                query_embedding = embed_query(query)
-                if query_embedding:
-                    scored = [
-                        (
-                            _cosine_similarity(query_embedding, chunk["embedding"]),
-                            chunk,
-                        )
-                        for chunk in embedded_chunks
-                    ]
-                    return [
-                        _public_chunk(
-                            chunk,
-                            score=score,
-                            retrieval_strategy="embedding",
-                        )
-                        for score, chunk in sorted(
-                            scored,
-                            key=lambda item: item[0],
-                            reverse=True,
-                        )
-                        if score > min_score
-                    ][:top_k]
-            except Exception:
-                logger.exception("Embedding RAG retrieval failed; using lexical fallback.")
+            if _embedding_index_is_stale(index_chunks, embedded_chunks):
+                logger.warning(
+                    "RAG embeddings are stale (%s embedded chunks vs %s indexed chunks); "
+                    "using lexical retrieval until embeddings are rebuilt.",
+                    len(embedded_chunks),
+                    len(index_chunks),
+                )
+            else:
+                try:
+                    query_embedding = embed_query(query)
+                    if query_embedding:
+                        scored = [
+                            (
+                                _cosine_similarity(query_embedding, chunk["embedding"]),
+                                chunk,
+                            )
+                            for chunk in embedded_chunks
+                        ]
+                        return [
+                            _public_chunk(
+                                chunk,
+                                score=score,
+                                retrieval_strategy="embedding",
+                            )
+                            for score, chunk in sorted(
+                                scored,
+                                key=lambda item: item[0],
+                                reverse=True,
+                            )
+                            if score > min_score
+                        ][:top_k]
+                except Exception:
+                    logger.exception("Embedding RAG retrieval failed; using lexical fallback.")
 
     query_tokens = _tokenize(query)
     scored = [
-        (_lexical_score(query_tokens, chunk), chunk) for chunk in _chunks_from_index()
+        (_lexical_score(query_tokens, chunk), chunk) for chunk in index_chunks
     ]
     return [
         _public_chunk(chunk, score=score, retrieval_strategy="lexical")
@@ -287,25 +357,54 @@ def format_rag_context(chunks: list[dict[str, Any]]) -> str:
     return "\n\n".join(formatted_chunks)
 
 
+def _source_min_score_for_chunk(chunk: dict[str, Any]) -> float:
+    strategy = str(chunk.get("retrieval_strategy") or "").casefold()
+    if strategy == "lexical":
+        return LEXICAL_SOURCE_MIN_SCORE
+    return EMBEDDING_SOURCE_MIN_SCORE
+
+
+def _query_topic_source_files(query: str, chunks: list[dict[str, Any]]) -> set[str]:
+    query_tokens = set(_tokenize(query))
+    if not query_tokens:
+        return set()
+
+    available_sources = {str(chunk.get("source") or "") for chunk in chunks if chunk.get("layer") == "evidence"}
+    matched_sources = {
+        source
+        for source, hints in EVIDENCE_TOPIC_SOURCE_HINTS.items()
+        if source in available_sources and query_tokens & hints
+    }
+    return matched_sources
+
+
 def collect_source_citations(
     chunks: list[dict[str, Any]],
     *,
-    min_score: float = SOURCE_MIN_SCORE,
+    query: str = "",
+    min_score: float | None = None,
     max_sources: int = MAX_SOURCE_COUNT,
 ) -> list[dict[str, str]]:
     sources: list[dict[str, str]] = []
     seen: set[str] = set()
     seen_titles: set[str] = set()
-    preferred_source_files = {
+    topic_source_files = _query_topic_source_files(query, chunks)
+    preferred_source_files = topic_source_files or {
         str(chunk.get("source") or "")
         for chunk in chunks[:3]
-        if chunk.get("layer") == "evidence" and float(chunk.get("score") or 0) >= min_score
+        if (
+            chunk.get("layer") == "evidence"
+            and float(chunk.get("score") or 0) >= (
+                min_score if min_score is not None else _source_min_score_for_chunk(chunk)
+            )
+        )
     }
 
     for chunk in chunks:
         if chunk.get("layer") != "evidence":
             continue
-        if float(chunk.get("score") or 0) < min_score:
+        score_threshold = min_score if min_score is not None else _source_min_score_for_chunk(chunk)
+        if float(chunk.get("score") or 0) < score_threshold:
             continue
         if preferred_source_files and chunk.get("source") not in preferred_source_files:
             continue

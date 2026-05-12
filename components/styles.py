@@ -148,25 +148,34 @@ body:has(.landing-page-bg),
     inset: 0;
     z-index: -1;
     background:
-        linear-gradient(180deg, rgba(6,20,19,.96) 0, rgba(6,20,19,.96) 4.85rem, transparent 4.85rem),
+        linear-gradient(180deg, rgba(6,20,19,.96) 0, rgba(6,20,19,.96) 5.625rem, transparent 5.625rem),
         radial-gradient(circle at 72% 35%, rgba(30,64,175,.18), transparent 26rem),
         #070c14;
     pointer-events: none;
 }}
 .st-key-landing_nav {{
-    height: 4.85rem !important;
-    padding: .72rem max(2rem, calc((100vw - 72rem) / 2)) !important;
+    height: 5.625rem !important;
+    min-height: 5.625rem !important;
+    padding: 0 max(2rem, calc((100vw - 72rem) / 2)) !important;
     border-bottom: 1px solid rgba(169,190,255,.08) !important;
     background: rgba(5,18,17,.96) !important;
     box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
 }}
 .st-key-landing_nav > div[data-testid="stVerticalBlock"] {{
     height: 100% !important;
     display: flex !important;
     justify-content: center !important;
+    align-items: center !important;
 }}
 .st-key-landing_nav div[data-testid="stHorizontalBlock"] {{
+    height: 100% !important;
     align-items: center !important;
+}}
+.landing-links,
+.nav-links-container {{
+    display: none !important;
 }}
 .landing-brand {{
     display: flex;
@@ -190,28 +199,32 @@ body:has(.landing-page-bg),
     font-size: .88rem;
     box-shadow: 0 0 22px rgba(29,78,216,.28);
 }}
-.landing-links {{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2.15rem;
-    color: #7888a3;
-    font-size: .82rem;
-    font-weight: 600;
+.landing-nav-spacer {{
+    width: 100%;
+    height: 1px;
+}}
+.st-key-landing_nav_actions,
+.st-key-landing_nav_actions > div[data-testid="stVerticalBlock"],
+.st-key-landing_nav_actions div[data-testid="stHorizontalBlock"] {{
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
 }}
 .landing-route-link {{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    height: 100%;
     text-decoration: none !important;
     line-height: 1;
     box-sizing: border-box;
 }}
 .landing-login-link,
 .st-key-landing_login_btn .stButton > button {{
-    height: 2.55rem !important;
-    padding: 0 .6rem !important;
+    min-height: 3rem !important;
+    height: 3rem !important;
+    padding: 0 .75rem !important;
     border: none !important;
     background: transparent !important;
     color: #8592aa !important;
@@ -223,8 +236,9 @@ body:has(.landing-page-bg),
 .landing-primary-link,
 .st-key-landing_start_btn .stButton > button,
 .st-key-landing_primary_cta .stButton > button {{
-    height: 2.75rem !important;
-    min-height: 2.75rem !important;
+    height: 3rem !important;
+    min-height: 3rem !important;
+    padding: 0 1.35rem !important;
     border: 1px solid rgba(255,255,255,.12) !important;
     border-radius: 999px !important;
     background: #1d4ed8 !important;
@@ -263,7 +277,7 @@ body:has(.landing-page-bg),
     max-width: 72rem !important;
     margin: 0 auto !important;
     padding: 5.05rem 2rem 4rem !important;
-    min-height: calc(100vh - 4.85rem) !important;
+    min-height: calc(100vh - 5.625rem) !important;
     box-sizing: border-box !important;
 }}
 .st-key-landing_hero > div[data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] {{
@@ -4964,6 +4978,13 @@ body:has(.st-key-chat_shell) .st-key-chat_sessions .stButton > button strong {{
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
+}}
+body:has(.chat-page-bg) .st-key-chat_sessions .sidebar-section-label,
+body:has(.st-key-chat_shell) .st-key-chat_sessions .sidebar-section-label {{
+    display: block !important;
+    padding: .72rem .25rem .42rem !important;
+    margin: 0 0 .18rem !important;
+    line-height: 1 !important;
 }}
 
 /* Visible Voice: keep live and completed chat responses readable. */
