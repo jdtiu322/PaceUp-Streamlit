@@ -50,9 +50,9 @@ def render_footer() -> None:
             <div class="footer-brand">PaceUp</div>
             <div class="footer-copy">&copy; 2025 PaceUp. All rights reserved.</div>
             <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Training FAQ</a>
+                <a href="?page=privacy" target="_self">Privacy Policy</a>
+                <a href="?page=terms" target="_self">Terms of Service</a>
+                <a href="?page=contact" target="_self">Training FAQ</a>
             </div>
         </div>
         """,

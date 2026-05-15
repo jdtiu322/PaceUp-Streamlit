@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import html
 import json
-from datetime import datetime
+from datetime import date, datetime
 
 import streamlit as st
 import streamlit.components.v1 as components
@@ -12,7 +12,7 @@ from config import ONBOARDING_DAY_OPTIONS, ONBOARDING_SEX_OPTIONS, normalize_fit
 from services import firebase as firebase_service
 
 
-VALID_PAGES = {"home", "login", "register", "about", "contact", "onboarding", "chat"}
+VALID_PAGES = {"home", "login", "register", "about", "contact", "onboarding", "chat", "terms", "privacy"}
 DEFAULT_PAGE = "home"
 PAGE_QUERY_PARAM = "page"
 AUTH_COOKIE_NAME = getattr(firebase_service, "AUTH_COOKIE_NAME", "paceup_refresh_token")
@@ -74,6 +74,14 @@ def init_state() -> None:
         "pending_assistant_messages": [],
         "user_profile": {},
         "user_profile_uid": None,
+        "show_name_prompt_after_onboarding": False,
+        "preferred_name_input": "",
+        "preferred_name_dialog_initialized": False,
+        "preferred_name_dialog_error": None,
+        "run_screenshot_result": None,
+        "run_screenshot_file_sig": "",
+        "run_screenshot_error": "",
+        "run_screenshot_saved_notice": "",
         "ob_fitness": "NOVICE",
         "ob_state_uid": None,
         "ob_training_days": [],
@@ -169,6 +177,14 @@ def logout_user() -> None:
     st.session_state.pending_assistant_messages = []
     st.session_state.user_profile = {}
     st.session_state.user_profile_uid = None
+    st.session_state.show_name_prompt_after_onboarding = False
+    st.session_state.preferred_name_input = ""
+    st.session_state.preferred_name_dialog_initialized = False
+    st.session_state.preferred_name_dialog_error = None
+    st.session_state.run_screenshot_result = None
+    st.session_state.run_screenshot_file_sig = ""
+    st.session_state.run_screenshot_error = ""
+    st.session_state.run_screenshot_saved_notice = ""
     st.session_state.onboarding_completed = False
     set_flash("success", "Signed out.")
     components.html(
@@ -202,6 +218,19 @@ def toggle_training_day(day: str) -> None:
     st.session_state.ob_training_days = [item for item, _label in ONBOARDING_DAY_OPTIONS if item in selected_days]
 
 
+def _coerce_goal_race_date(value) -> date | None:
+    if isinstance(value, datetime):
+        return value.date()
+    if isinstance(value, date):
+        return value
+    if isinstance(value, str):
+        try:
+            return date.fromisoformat(value[:10])
+        except ValueError:
+            return None
+    return None
+
+
 def prime_onboarding_state(uid: str, profile: dict) -> None:
     if st.session_state.get("ob_state_uid") == uid:
         st.session_state.ob_fitness = normalize_fitness_level(st.session_state.get("ob_fitness"))
@@ -210,22 +239,13 @@ def prime_onboarding_state(uid: str, profile: dict) -> None:
         st.session_state.ob_weight = str(st.session_state.get("ob_weight", ""))
         st.session_state.ob_current_weekly_km = str(st.session_state.get("ob_current_weekly_km", ""))
         st.session_state.ob_recent_race_time = str(st.session_state.get("ob_recent_race_time", ""))
-        goal_date = st.session_state.get("ob_goal_race_date")
-        if isinstance(goal_date, str):
-            try:
-                st.session_state.ob_goal_race_date = datetime.fromisoformat(goal_date).date()
-            except Exception:
-                st.session_state.ob_goal_race_date = datetime.now().date()
+        st.session_state.ob_goal_race_date = _coerce_goal_race_date(st.session_state.get("ob_goal_race_date"))
         st.session_state.ob_training_days = [
             day for day, _label in ONBOARDING_DAY_OPTIONS if day in st.session_state.get("ob_training_days", [])
         ]
         return
 
-    race_date_raw = profile.get("goal_race_date")
-    try:
-        race_date = datetime.fromisoformat(race_date_raw).date() if race_date_raw else datetime.now().date()
-    except Exception:
-        race_date = datetime.now().date()
+    race_date = _coerce_goal_race_date(profile.get("goal_race_date"))
 
     training_days = profile.get("training_days") or []
     defaults = {

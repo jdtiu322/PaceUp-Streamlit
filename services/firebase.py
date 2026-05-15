@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import logging
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 
 import firebase_admin
 import requests
@@ -39,6 +39,22 @@ _AUTH_BRIDGE = st_components.declare_component(
     "paceup_auth_bridge",
     path=str(BASE_DIR / "services" / "auth_bridge_component"),
 )
+
+
+def _coerce_iso_date(value) -> str | None:
+    if isinstance(value, datetime):
+        return value.date().isoformat()
+    if isinstance(value, date):
+        return value.isoformat()
+    if isinstance(value, str):
+        text = value.strip()
+        if not text:
+            return None
+        try:
+            return date.fromisoformat(text[:10]).isoformat()
+        except ValueError:
+            return None
+    return None
 
 
 def _firebase_credentials_payload() -> dict:
@@ -192,6 +208,14 @@ def _clear_auth_bridge_token() -> None:
 def create_auth_session(refresh_token: str, uid: str | None = None) -> str:
     """Returns the refresh token directly so callers can stuff it into the URL bridge."""
     return refresh_token
+
+
+def persist_auth_session(refresh_token: str) -> None:
+    """Best-effort browser persistence for the Firebase refresh token."""
+    try:
+        _set_refresh_token_cookie(refresh_token)
+    except Exception:
+        logger.exception("Failed to persist Firebase auth refresh token.")
 
 
 def _get_refresh_token_cookie(*, use_browser_bridge: bool = True) -> str:
@@ -401,9 +425,7 @@ def restore_saved_session() -> None:
     if st.session_state.get("user") is not None:
         return
 
-    refresh_token = _get_refresh_token_cookie(
-        use_browser_bridge=st.session_state.get("page") in {"chat", "onboarding"}
-    )
+    refresh_token = _get_refresh_token_cookie(use_browser_bridge=True)
     if not FIREBASE_WEB_API_KEY or not refresh_token:
         return
 
@@ -508,9 +530,89 @@ def check_onboarding_status(uid: str) -> bool:
 
 
 def save_onboarding_data(uid: str, data: dict) -> None:
+    db = get_firestore_client()
+    user_ref = db.collection("users").document(uid)
+    current_profile = {}
+    try:
+        current_doc = user_ref.get()
+        current_profile = current_doc.to_dict() if current_doc.exists else {}
+    except Exception:
+        logger.exception("Failed to read existing profile before onboarding save for user %s.", uid)
+
+    normalized_goal_date = _coerce_iso_date(data.get("goal_race_date"))
+    if normalized_goal_date:
+        data["goal_race_date"] = normalized_goal_date
     data["onboarding_completed"] = True
+    data["preferred_name_prompted"] = False
     data["updated_at"] = datetime.now(timezone.utc)
-    get_firestore_client().collection("users").document(uid).update(data)
+    user_ref.update(data)
+
+    active_plan_id = str(current_profile.get("active_plan_id") or "").strip()
+    if active_plan_id and normalized_goal_date:
+        try:
+            user_ref.collection("plans").document(active_plan_id).update(
+                {
+                    "goal_distance": data.get("goal_distance"),
+                    "goal_race_date": normalized_goal_date,
+                    "preferred_long_run_day": data.get("preferred_long_run_day"),
+                    "updated_at": data["updated_at"],
+                }
+            )
+        except Exception:
+            logger.exception("Failed to sync onboarding goal date to active plan for user %s.", uid)
+
+
+def update_goal_race_date(uid: str, goal_race_date) -> str:
+    normalized_goal_date = _coerce_iso_date(goal_race_date)
+    if not normalized_goal_date:
+        raise ValueError("Choose a valid target race date.")
+
+    now = datetime.now(timezone.utc)
+    db = get_firestore_client()
+    user_ref = db.collection("users").document(uid)
+    profile_doc = user_ref.get()
+    profile = profile_doc.to_dict() if profile_doc.exists else {}
+    user_ref.update({"goal_race_date": normalized_goal_date, "updated_at": now})
+
+    active_plan_id = str(profile.get("active_plan_id") or "").strip()
+    if active_plan_id:
+        try:
+            user_ref.collection("plans").document(active_plan_id).update(
+                {"goal_race_date": normalized_goal_date, "updated_at": now}
+            )
+        except Exception:
+            logger.exception("Failed to sync chat-updated goal date to active plan for user %s.", uid)
+    return normalized_goal_date
+
+
+def save_preferred_name(uid: str, preferred_name: str) -> str:
+    name = " ".join((preferred_name or "").split())[:80]
+    if not name:
+        return ""
+
+    now = datetime.now(timezone.utc)
+    get_firestore_client().collection("users").document(uid).update(
+        {
+            "display_name": name,
+            "preferred_name": name,
+            "preferred_name_prompted": True,
+            "updated_at": now,
+        }
+    )
+    try:
+        auth.update_user(uid, display_name=name)
+    except Exception:
+        logger.exception("Failed to update Auth display name for user %s.", uid)
+    return name
+
+
+def dismiss_preferred_name_prompt(uid: str) -> None:
+    get_firestore_client().collection("users").document(uid).update(
+        {
+            "preferred_name_prompted": True,
+            "updated_at": datetime.now(timezone.utc),
+        }
+    )
 
 
 def get_user_profile(uid: str) -> dict:
@@ -524,8 +626,11 @@ def get_user_profile(uid: str) -> dict:
 
 def build_chat_profile(user: auth.UserRecord) -> dict:
     profile = get_user_profile(user.uid)
+    goal_race_date = _coerce_iso_date(profile.get("goal_race_date"))
+    preferred_name = " ".join(str(profile.get("preferred_name") or "").split())
     display_name = (
-        profile.get("display_name")
+        preferred_name
+        or profile.get("display_name")
         or profile.get("full_name")
         or user.display_name
         or (user.email.split("@", 1)[0] if user.email else "Runner")
@@ -535,12 +640,14 @@ def build_chat_profile(user: auth.UserRecord) -> dict:
         "email": user.email or profile.get("email", ""),
         "display_name": display_name,
         "full_name": profile.get("full_name") or display_name,
+        "preferred_name": preferred_name or None,
+        "preferred_name_prompted": profile.get("preferred_name_prompted"),
         "age": profile.get("age"),
         "weight_kg": profile.get("weight_kg"),
         "sex": profile.get("sex"),
         "fitness_level": profile.get("fitness_level"),
         "goal_distance": profile.get("goal_distance"),
-        "goal_race_date": profile.get("goal_race_date"),
+        "goal_race_date": goal_race_date,
         "current_weekly_km": profile.get("current_weekly_km"),
         "training_days_per_week": profile.get("training_days_per_week"),
         "training_days": profile.get("training_days") or [],

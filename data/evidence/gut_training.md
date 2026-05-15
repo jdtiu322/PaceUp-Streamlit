@@ -15,7 +15,7 @@ Citation:
 - Source type: Systematic literature review
 - DOI: 10.1007/s40279-023-01841-0
 - PMID: 37061651
-- URL: https://pubmed.ncbi.nlm.nih.gov/37061651/
+- URL: https://doi.org/10.1007/s40279-023-01841-0
 
 ## High carbohydrate race practice may help tolerance more than performance in the short term
 
@@ -32,4 +32,4 @@ Citation:
 - Source type: Clinical trial
 - DOI: 10.3390/nu14091929
 - PMID: 35565896
-- URL: https://pubmed.ncbi.nlm.nih.gov/35565896/
+- URL: https://doi.org/10.3390/nu14091929

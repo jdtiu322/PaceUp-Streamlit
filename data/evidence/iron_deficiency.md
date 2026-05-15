@@ -15,7 +15,7 @@ Citation:
 - Source type: Observational case study
 - DOI: 10.3390/ijerph192416606
 - PMID: 36554486
-- URL: https://pubmed.ncbi.nlm.nih.gov/36554486/
+- URL: https://doi.org/10.3390/ijerph192416606
 
 ## Low energy availability can worsen iron-related stress in endurance runners
 
@@ -32,7 +32,7 @@ Citation:
 - Source type: Experimental study
 - DOI: 10.14814/phy2.14494
 - PMID: 32597030
-- URL: https://pubmed.ncbi.nlm.nih.gov/32597030/
+- URL: https://doi.org/10.14814/phy2.14494
 
 ## Iron supplementation decisions should be based on testing and context
 
@@ -49,4 +49,4 @@ Citation:
 - Source type: Review
 - DOI: 10.2165/00007256-199826040-00001
 - PMID: 9820921
-- URL: https://pubmed.ncbi.nlm.nih.gov/9820921/
+- URL: https://doi.org/10.2165/00007256-199826040-00001

@@ -15,7 +15,7 @@ Citation:
 - Source type: Critical review
 - DOI: 10.1519/JSC.0000000000001430
 - PMID: 27045602
-- URL: https://pubmed.ncbi.nlm.nih.gov/27045602/
+- URL: https://doi.org/10.1519/JSC.0000000000001430
 
 ## Very long events can benefit from higher carbohydrate delivery using multiple transportable carbohydrates
 
@@ -32,7 +32,7 @@ Citation:
 - Source type: Review
 - DOI: 10.1007/s40279-013-0079-0
 - PMID: 23846824
-- URL: https://pubmed.ncbi.nlm.nih.gov/23846824/
+- URL: https://doi.org/10.1007/s40279-013-0079-0
 
 ## Multiple transportable carbohydrate blends can outperform glucose-only strategies at high intake rates
 
@@ -49,4 +49,4 @@ Citation:
 - Source type: Controlled performance study
 - DOI: 10.1249/mss.0b013e31815adf19
 - PMID: 18202575
-- URL: https://pubmed.ncbi.nlm.nih.gov/18202575/
+- URL: https://doi.org/10.1249/mss.0b013e31815adf19

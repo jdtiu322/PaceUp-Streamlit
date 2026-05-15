@@ -15,7 +15,7 @@ Citation:
 - Source type: Biomechanics study
 - DOI: 10.1249/MSS.0b013e3181ebedf4
 - PMID: 20581720
-- URL: https://pubmed.ncbi.nlm.nih.gov/20581720/
+- URL: https://doi.org/10.1249/MSS.0b013e3181ebedf4
 
 ## Gait retraining can change mechanics, but performance gains are not guaranteed
 
@@ -32,4 +32,4 @@ Citation:
 - Source type: Systematic review and meta-analysis
 - DOI: 10.2519/jospt.2022.10585
 - PMID: 35128941
-- URL: https://pubmed.ncbi.nlm.nih.gov/35128941/
+- URL: https://doi.org/10.2519/jospt.2022.10585

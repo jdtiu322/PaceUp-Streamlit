@@ -15,7 +15,7 @@ Citation:
 - Source type: Systematic review and meta-analysis
 - DOI: 10.1136/bjsports-2022-106328
 - PMID: 36720584
-- URL: https://pubmed.ncbi.nlm.nih.gov/36720584/
+- URL: https://doi.org/10.1136/bjsports-2022-106328
 
 ## Imaging grade can help explain why some runners need a slower comeback
 
@@ -32,4 +32,4 @@ Citation:
 - Source type: Systematic review and meta-analysis
 - DOI: 10.1177/0363546521993807
 - PMID: 33720786
-- URL: https://pubmed.ncbi.nlm.nih.gov/33720786/
+- URL: https://doi.org/10.1177/0363546521993807

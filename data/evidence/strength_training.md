@@ -14,7 +14,7 @@ Citation:
 - Year: 2018
 - Source type: Systematic review
 - DOI: 10.1007/s40279-017-0835-7
-- URL: https://pubmed.ncbi.nlm.nih.gov/29249083/
+- URL: https://doi.org/10.1007/s40279-017-0835-7
 
 ## Heavy resistance, plyometric, and combined methods can be useful
 
@@ -30,7 +30,7 @@ Citation:
 - Year: 2024
 - Source type: Systematic review and meta-analysis
 - DOI: 10.1007/s40279-023-01978-y
-- URL: https://pubmed.ncbi.nlm.nih.gov/38165636/
+- URL: https://doi.org/10.1007/s40279-023-01978-y
 
 ## Strength work should not replace too much running specificity
 
@@ -63,4 +63,4 @@ Citation:
 - Source type: Umbrella review
 - DOI: 10.1519/JSC.0000000000005056
 - PMID: 40153564
-- URL: https://pubmed.ncbi.nlm.nih.gov/40153564/
+- URL: https://doi.org/10.1519/JSC.0000000000005056

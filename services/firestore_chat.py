@@ -62,6 +62,53 @@ def create_chat_session(uid: str, first_message: str) -> str:
     return ref[1].id
 
 
+def rename_chat_session(uid: str, session_id: str, new_title: str) -> str:
+    title = (new_title or "").strip()
+    if not title:
+        return ""
+    title = title[:120]
+    try:
+        (
+            get_firestore_client()
+            .collection("users").document(uid)
+            .collection("chat_sessions").document(session_id)
+            .update({
+                "title": title,
+                "conversation_title": title,
+                "updated_at": datetime.now(timezone.utc),
+            })
+        )
+        return title
+    except Exception:
+        logger.exception("Failed to rename chat session %s/%s.", uid, session_id)
+        return ""
+
+
+def delete_chat_session(uid: str, session_id: str) -> bool:
+    try:
+        db = get_firestore_client()
+        session_ref = (
+            db.collection("users").document(uid)
+            .collection("chat_sessions").document(session_id)
+        )
+        messages_ref = session_ref.collection("messages")
+        while True:
+            docs = list(messages_ref.limit(300).stream())
+            if not docs:
+                break
+            batch = db.batch()
+            for doc in docs:
+                batch.delete(doc.reference)
+            batch.commit()
+            if len(docs) < 300:
+                break
+        session_ref.delete()
+        return True
+    except Exception:
+        logger.exception("Failed to delete chat session %s/%s.", uid, session_id)
+        return False
+
+
 def _message_from_doc(doc) -> dict:
     data = doc.to_dict() or {}
     message = {

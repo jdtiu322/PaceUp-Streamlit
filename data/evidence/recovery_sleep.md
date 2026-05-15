@@ -14,7 +14,7 @@ Citation:
 - Year: 2018
 - Source type: Systematic review
 - DOI: 10.1007/s40279-017-0832-x
-- URL: https://pubmed.ncbi.nlm.nih.gov/29352373/
+- URL: https://doi.org/10.1007/s40279-017-0832-x
 
 ## Athletes often sleep less than general recommendations
 
@@ -30,7 +30,7 @@ Citation:
 - Year: 2021
 - Source type: Systematic review
 - DOI: 10.1016/j.jshs.2020.03.006
-- URL: https://pubmed.ncbi.nlm.nih.gov/32325024/
+- URL: https://doi.org/10.1016/j.jshs.2020.03.006
 
 ## Sleep loss can affect sport-specific and cognitive performance
 
@@ -46,7 +46,7 @@ Citation:
 - Year: 2015
 - Source type: Review
 - DOI: 10.1007/s40279-014-0260-0
-- URL: https://pubmed.ncbi.nlm.nih.gov/25315456/
+- URL: https://doi.org/10.1007/s40279-014-0260-0
 
 ## Sleep interventions may help performance, but claims should stay measured
 

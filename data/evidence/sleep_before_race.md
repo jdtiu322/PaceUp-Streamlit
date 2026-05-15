@@ -15,7 +15,7 @@ Citation:
 - Source type: Observational study
 - DOI: 10.1080/00913847.2020.1784688
 - PMID: 32571135
-- URL: https://pubmed.ncbi.nlm.nih.gov/32571135/
+- URL: https://doi.org/10.1080/00913847.2020.1784688
 
 ## Improving sleep across the training week is more reliable than panicking about one night
 
@@ -32,4 +32,4 @@ Citation:
 - Source type: Systematic review
 - DOI: 10.1016/j.sleep.2020.11.028
 - PMID: 33352457
-- URL: https://pubmed.ncbi.nlm.nih.gov/33352457/
+- URL: https://doi.org/10.1016/j.sleep.2020.11.028

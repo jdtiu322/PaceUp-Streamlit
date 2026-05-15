@@ -15,7 +15,8 @@ Each section should include:
 ## Source Rules
 
 - Prefer systematic reviews, meta-analyses, consensus statements, and position stands.
-- Use primary source pages such as PubMed, PMC, journal pages, or DOI pages.
+- Use primary source pages such as DOI landing pages, journal pages, PMC, guideline pages, or PubMed when a better primary landing page is not available.
+- Avoid defaulting every citation URL to PubMed if the DOI or journal landing page is available.
 - Include source title, authors, year, source type, DOI when available, and URL.
 - Paraphrase findings. Do not copy long passages from papers.
 - If evidence is mixed or low quality, say so clearly.
@@ -25,4 +26,3 @@ Each section should include:
 The coaching layer in `data/knowledge` defines PaceUp's voice and practical policy. This evidence layer gives the model credible support for specific claims.
 
 When both layers are retrieved, the answer should combine practical coaching with evidence-aware caution.
-

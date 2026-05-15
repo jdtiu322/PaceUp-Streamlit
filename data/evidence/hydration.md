@@ -30,7 +30,7 @@ Citation:
 - Year: 2014
 - Source type: Review
 - DOI: 10.1002/cphy.c130017
-- URL: https://pubmed.ncbi.nlm.nih.gov/24692140/
+- URL: https://doi.org/10.1002/cphy.c130017
 
 ## Avoid both dehydration and overdrinking
 
@@ -46,7 +46,7 @@ Citation:
 - Year: 2007
 - Source type: ACSM position stand
 - DOI: 10.1249/mss.0b013e31802ca597
-- URL: https://pubmed.ncbi.nlm.nih.gov/17277604/
+- URL: https://doi.org/10.1249/mss.0b013e31802ca597
 
 ## Heat and humidity should shift advice from pace to effort
 
@@ -62,5 +62,5 @@ Citation:
 - Year: 2016
 - Source type: Review
 - DOI: 10.1016/j.autneu.2016.02.003
-- URL: https://pubmed.ncbi.nlm.nih.gov/26944095/
+- URL: https://doi.org/10.1016/j.autneu.2016.02.003
 

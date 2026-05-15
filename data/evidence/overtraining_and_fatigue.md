@@ -15,7 +15,7 @@ Citation:
 - Source type: Systematic review
 - DOI: 10.1123/ijspp.2021-0448
 - PMID: 35320774
-- URL: https://pubmed.ncbi.nlm.nih.gov/35320774/
+- URL: https://doi.org/10.1123/ijspp.2021-0448
 
 ## Management usually starts with load reduction and recovery, not heroics
 
@@ -32,4 +32,4 @@ Citation:
 - Source type: Practical review
 - DOI: 10.1177/1941738111434406
 - PMID: 23016079
-- URL: https://pubmed.ncbi.nlm.nih.gov/23016079/
+- URL: https://doi.org/10.1177/1941738111434406

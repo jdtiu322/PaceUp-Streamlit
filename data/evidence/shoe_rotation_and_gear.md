@@ -15,7 +15,7 @@ Citation:
 - Source type: Systematic review and meta-analysis
 - DOI: 10.1080/17461391.2021.1998642
 - PMID: 34726119
-- URL: https://pubmed.ncbi.nlm.nih.gov/34726119/
+- URL: https://doi.org/10.1080/17461391.2021.1998642
 
 ## Shoe features may affect injury risk in some runners, but not uniformly
 
@@ -32,7 +32,7 @@ Citation:
 - Source type: Randomized controlled trial
 - DOI: 10.1136/bjsports-2015-095031
 - PMID: 26746907
-- URL: https://pubmed.ncbi.nlm.nih.gov/26746907/
+- URL: https://doi.org/10.1136/bjsports-2015-095031
 
 ## Advanced race shoes can improve economy, but they still need testing in training
 
@@ -49,4 +49,4 @@ Citation:
 - Source type: Randomized cross-over study
 - DOI: 10.1055/a-1776-7986
 - PMID: 35523201
-- URL: https://pubmed.ncbi.nlm.nih.gov/35523201/
+- URL: https://doi.org/10.1055/a-1776-7986

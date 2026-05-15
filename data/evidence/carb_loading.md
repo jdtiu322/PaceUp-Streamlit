@@ -15,7 +15,7 @@ Citation:
 - Source type: Systematic review and meta-analysis
 - DOI: 10.3389/fphys.2025.1620943
 - PMID: 40901614
-- URL: https://pubmed.ncbi.nlm.nih.gov/40901614/
+- URL: https://doi.org/10.3389/fphys.2025.1620943
 
 ## A simpler multi-day high carbohydrate strategy can work without an elaborate depletion protocol
 
@@ -32,4 +32,4 @@ Citation:
 - Source type: Experimental study
 - DOI: 10.1016/j.jsams.2019.03.009
 - PMID: 30940441
-- URL: https://pubmed.ncbi.nlm.nih.gov/30940441/
+- URL: https://doi.org/10.1016/j.jsams.2019.03.009

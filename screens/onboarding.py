@@ -346,7 +346,14 @@ def _step_schedule() -> None:
         )
     with c2:
         st.markdown('<div class="ob-field-label">Target race date</div>', unsafe_allow_html=True)
-        st.date_input("Race date", key="ob_goal_race_date", label_visibility="collapsed")
+        if isinstance(st.session_state.get("ob_goal_race_date"), date) and st.session_state.ob_goal_race_date < date.today():
+            st.session_state.ob_goal_race_date = None
+        st.date_input(
+            "Race date",
+            key="ob_goal_race_date",
+            min_value=date.today(),
+            label_visibility="collapsed",
+        )
 
 
 def _step_health() -> None:
@@ -429,6 +436,7 @@ def _save_onboarding(user) -> None:
         st.session_state.user_profile = build_chat_profile(user)
         st.session_state.user_profile_uid = user.uid
         st.session_state.onboarding_completed = True
+        st.session_state.show_name_prompt_after_onboarding = True
         st.session_state.ob_step = 1
         log_event(user.uid, "onboarding_completed", {"training_days_per_week": len(training_days)})
         go_to("chat")

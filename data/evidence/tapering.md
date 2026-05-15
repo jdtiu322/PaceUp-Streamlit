@@ -14,7 +14,7 @@ Citation:
 - Year: 2007
 - Source type: Meta-analysis
 - DOI: 10.1249/mss.0b013e31806010e0
-- URL: https://pubmed.ncbi.nlm.nih.gov/17762369/
+- URL: https://doi.org/10.1249/mss.0b013e31806010e0
 
 ## Tapering should reduce fatigue without losing fitness
 
@@ -46,5 +46,5 @@ Citation:
 - Year: 2007
 - Source type: Meta-analysis
 - DOI: 10.1249/mss.0b013e31806010e0
-- URL: https://pubmed.ncbi.nlm.nih.gov/17762369/
+- URL: https://doi.org/10.1249/mss.0b013e31806010e0
 

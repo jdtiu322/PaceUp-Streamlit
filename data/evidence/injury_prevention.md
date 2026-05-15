@@ -30,7 +30,7 @@ Citation:
 - Year: 2024
 - Source type: Umbrella systematic review
 - DOI: 10.1016/j.jshs.2024.04.011
-- URL: https://pubmed.ncbi.nlm.nih.gov/38697289/
+- URL: https://doi.org/10.1016/j.jshs.2024.04.011
 
 ## Sudden training-load changes may increase risk, but evidence is not simple
 
@@ -46,7 +46,8 @@ Citation:
 - Year: 2018
 - Source type: Systematic review
 - PMID: 30534459
-- URL: https://pubmed.ncbi.nlm.nih.gov/30534459/
+- PMCID: PMC6253751
+- URL: https://pmc.ncbi.nlm.nih.gov/articles/PMC6253751/
 
 ## Training-error evidence is mixed, so advice should stay cautious
 
@@ -62,7 +63,8 @@ Citation:
 - Year: 2012
 - Source type: Systematic review
 - PMID: 22389869
-- URL: https://pubmed.ncbi.nlm.nih.gov/22389869/
+- PMCID: PMC3290924
+- URL: https://pmc.ncbi.nlm.nih.gov/articles/PMC3290924/
 
 ## Gait retraining can change loading variables, but injury prevention claims should be careful
 
@@ -78,5 +80,5 @@ Citation:
 - Year: 2022
 - Source type: Systematic review and meta-analysis
 - DOI: 10.2519/jospt.2022.10585
-- URL: https://pubmed.ncbi.nlm.nih.gov/35128941/
+- URL: https://doi.org/10.2519/jospt.2022.10585
 

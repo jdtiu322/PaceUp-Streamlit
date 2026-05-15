@@ -14,7 +14,7 @@ Citation:
 - Year: 2017
 - Source type: Position stand
 - DOI: 10.1186/s12970-017-0189-4
-- URL: https://pubmed.ncbi.nlm.nih.gov/28919842/
+- URL: https://doi.org/10.1186/s12970-017-0189-4
 
 ## Nutrition strategies should be individualized to the athlete and event
 
@@ -30,7 +30,7 @@ Citation:
 - Year: 2016
 - Source type: Joint position statement
 - DOI: 10.1016/j.jand.2015.12.006
-- URL: https://pubmed.ncbi.nlm.nih.gov/26920240/
+- URL: https://doi.org/10.1016/j.jand.2015.12.006
 
 ## Acute carbohydrate feeding can improve endurance performance, but context matters
 
@@ -46,7 +46,7 @@ Citation:
 - Year: 2024
 - Source type: Systematic review and meta-analysis
 - DOI: 10.1080/10408398.2023.2233633
-- URL: https://pubmed.ncbi.nlm.nih.gov/37449467/
+- URL: https://doi.org/10.1080/10408398.2023.2233633
 
 ## Post-exercise fueling matters most when recovery time is short
 

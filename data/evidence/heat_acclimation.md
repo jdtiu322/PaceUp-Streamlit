@@ -15,7 +15,7 @@ Citation:
 - Source type: Systematic review and meta-analysis
 - DOI: 10.1007/s40279-017-0808-x
 - PMID: 29129022
-- URL: https://pubmed.ncbi.nlm.nih.gov/29129022/
+- URL: https://doi.org/10.1007/s40279-017-0808-x
 
 ## Passive heat strategies can be a practical alternative when full heat camps are unrealistic
 
@@ -32,7 +32,7 @@ Citation:
 - Source type: Review
 - DOI: 10.3389/fphys.2018.01851
 - PMID: 30618849
-- URL: https://pubmed.ncbi.nlm.nih.gov/30618849/
+- URL: https://doi.org/10.3389/fphys.2018.01851
 
 ## Cooling can help race-day performance, but it is not a substitute for acclimation
 
@@ -49,4 +49,4 @@ Citation:
 - Source type: Systematic review
 - DOI: 10.1186/1741-7015-10-166
 - PMID: 23249542
-- URL: https://pubmed.ncbi.nlm.nih.gov/23249542/
+- URL: https://doi.org/10.1186/1741-7015-10-166
